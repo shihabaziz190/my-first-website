@@ -2,15 +2,42 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>My Full Website</title>
+    <title>My Mobile E-commerce Shop</title>
 </head>
-<body style="text-align: center; font-family: Arial; background-color: #f4f4f4; padding-top: 50px;">
-    <h1 style="color: darkblue;">Welcome to my Full Professional Website!</h1>
-    <p>This site is fully powered by Python and Flask on Mobile.</p>
-    
-    <form action="/submit" method="POST" style="margin-top: 30px;">
-        <input type="text" name="username" placeholder="আপনার নাম লিখুন" required style="padding: 10px; width: 250px; border-radius: 5px; border: 1px solid #ccc;"><br><br>
-        <button type="submit" style="padding: 10px 20px; background-color: green; color: white; border: none; border-radius: 5px; cursor: pointer;">Submit করুন</button>
-    </form>
+<body style="text-align: center; font-family: Arial; background-color: #f9f9f9; padding: 20px;">
+
+    <h1 style="color: #2c3e50;">🛍️ My Mobile Online Shop</h1>
+    <p style="color: #7f8c8d;">পাইথন এবং ফ্লাস্ক দিয়ে তৈরি আপনার প্রথম ই-কমার্স সাইট</p>
+
+    <div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-top: 30px;">
+        <div style="background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); width: 200px;">
+            <h3>👕 Smart T-Shirt</h3>
+            <p style="color: #e74c3c; font-weight: bold;">Price: ৳৪ ১৫০</p>
+        </div>
+        <div style="background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); width: 200px;">
+            <h3>⌚ Luxury Watch</h3>
+            <p style="color: #e74c3c; font-weight: bold;">Price: ৳১,৫০০</p>
+        </div>
+        <div style="background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); width: 200px;">
+            <h3>🎧 Wireless Headphone</h3>
+            <p style="color: #e74c3c; font-weight: bold;">Price: ৳১,২০০</p>
+        </div>
+    </div>
+
+    <div style="margin-top: 40px; background: white; padding: 20px; border-radius: 8px; display: inline-block; box-shadow: 0 2px 5px rgba(0,0,0,0.1); width: 85%; max-width: 400px;">
+        <h3 style="color: #27ae60;">📦 দ্রুত অর্ডার করুন</h3>
+        <form action="/place-order" method="POST">
+            <input type="text" name="customer_name" placeholder="আপনার নাম লিখুন" required style="padding: 10px; width: 90%; margin-bottom: 10px; border-radius: 5px; border: 1px solid #ccc;">
+            <input type="tel" name="customer_phone" placeholder="মোবাইল নম্বর" required style="padding: 10px; width: 90%; margin-bottom: 10px; border-radius: 5px; border: 1px solid #ccc;">
+            <select name="product_name" required style="padding: 10px; width: 96%; margin-bottom: 15px; border-radius: 5px; border: 1px solid #ccc;">
+                <option value="">পণ্যটি সিলেক্ট করুন</option>
+                <option value="Smart T-Shirt">Smart T-Shirt - ৳৪৫০</option>
+                <option value="Luxury Watch">Luxury Watch - ৳১,৫০০</option>
+                <option value="Wireless Headphone">Wireless Headphone - ৳১,২০০</option>
+            </select>
+            <button type="submit" style="padding: 12px; background-color: #27ae60; color: white; border: none; border-radius: 5px; width: 96%; font-size: 16px; cursor: pointer; font-weight: bold;">Confirm Order</button>
+        </form>
+    </div>
+
 </body>
 </html>
