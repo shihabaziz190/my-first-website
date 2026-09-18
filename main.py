@@ -117,3 +117,14 @@ def login():
     return render_template('login.html')
 with app.app_context():
     db.create_all()
+with app.app_context():
+    db.create_all()
+    if not User.query.filter_by(email='admin@gmail.com').first():
+        user = User(
+            name='Admin',
+            email='admin@gmail.com',
+            password=generate_password_hash('123456'),
+            role='admin'
+        )
+        db.session.add(user)
+        db.session.commit()
