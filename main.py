@@ -128,3 +128,18 @@ with app.app_context():
         )
         db.session.add(user)
         db.session.commit()
+@app.route('/admin')
+def admin():
+    if 'user' not in session:
+        return redirect(url_for('login'))
+
+    if session.get('role') != 'admin':
+        return 'আপনার এই পেজ দেখার অনুমতি নেই', 403
+
+    return render_template('admin.html')
+
+
+@app.route('/logout')
+def logout():
+    session.clear()
+    return redirect(url_for('home'))
