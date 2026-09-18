@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Mobile Online Shop</title>
+</head>
+<body>
+    <h1>🛍️ My Mobile Online Shop</h1>
+
+    <form action="/place-order" method="POST">
+        <input type="text" name="customer_name" placeholder="আপনার নাম লিখুন" required>
+        <input type="tel" name="customer_phone" placeholder="মোবাইল নম্বর" required>
+
+        <select name="product_name" required>
+            <option value="">পণ্যটি সিলেক্ট করুন</option>
+            <option value="Smart T-Shirt">Smart T-Shirt - ৳450</option>
+            <option value="Luxury Watch">Luxury Watch - ৳1,500</option>
+            <option value="Wireless Headphone">Wireless Headphone - ৳1,200</option>
+        </select>
+
+        <button type="submit">অর্ডার করুন</button>
+    </form>
+</body>
+</html>
