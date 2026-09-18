@@ -3,23 +3,88 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Mobile Online Shop</title>
+    <title>আমার অনলাইন দোকান</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f5f5;
+            margin: 0;
+            padding: 30px;
+        }
+        .container {
+            max-width: 520px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        label {
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        input, select, button {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+        }
+        button {
+            background: #27ae60;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
-    <h1>🛍️ My Mobile Online Shop</h1>
+    <div class="container">
+        <h1>🛍️ আমার অনলাইন দোকান</h1>
 
-    <form action="/place-order" method="POST">
-        <input type="text" name="customer_name" placeholder="আপনার নাম লিখুন" required>
-        <input type="tel" name="customer_phone" placeholder="মোবাইল নম্বর" required>
+        <form action="/place-order" method="POST">
+            <div>
+                <label for="customer_name">আপনার নাম:</label>
+                <input type="text" id="customer_name" name="customer_name" placeholder="আপনার নাম লিখুন" required>
+            </div>
 
-        <select name="product_name" required>
-            <option value="">পণ্যটি সিলেক্ট করুন</option>
-            <option value="Smart T-Shirt">Smart T-Shirt - ৳450</option>
-            <option value="Luxury Watch">Luxury Watch - ৳1,500</option>
-            <option value="Wireless Headphone">Wireless Headphone - ৳1,200</option>
-        </select>
+            <div>
+                <label for="district_thana">জেলা ও থানা:</label>
+                <input type="text" id="district_thana" name="district_thana" placeholder="যেমন: চট্টগ্রাম, পটিয়া" required>
+            </div>
 
-        <button type="submit">অর্ডার করুন</button>
-    </form>
+            <div>
+                <label for="village_market">গ্রাম বা বাজার:</label>
+                <input type="text" id="village_market" name="village_market" placeholder="গ্রাম বা বাজার লিখুন" required>
+            </div>
+
+            <div>
+                <label for="customer_phone">মোবাইল নম্বর:</label>
+                <input type="tel" id="customer_phone" name="customer_phone" placeholder="০১XXXXXXXXX" required>
+            </div>
+
+            <div>
+                <label for="product_name">পণ্য নির্বাচন করুন:</label>
+                <select id="product_name" name="product_name" required>
+                    <option value="">পণ্যটি সিলেক্ট করুন</option>
+                    <option value="Smart T-Shirt">Smart T-Shirt - ৳৪৫০</option>
+                    <option value="Luxury Watch">Luxury Watch - ৳১,৫০০</option>
+                    <option value="Wireless Headphone">Wireless Headphone - ৳১,২০০</option>
+                </select>
+            </div>
+
+            <button type="submit">অর্ডার করুন</button>
+        </form>
+    </div>
 </body>
 </html>
