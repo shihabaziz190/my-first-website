@@ -57,7 +57,6 @@ def place_order():
         <a href='/' style='text-decoration: none; background: #3498db; color: white; padding: 10px 20px; border-radius: 5px;'>পণ্য কিনতে ফিরে যান</a>
     </div>
     """
-
-if __name__ == '__main__':
-    init_ecommerce_db()
-    app.run(debug=True)
+if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port)
