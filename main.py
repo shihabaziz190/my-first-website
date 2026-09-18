@@ -115,4 +115,5 @@ def login():
         flash('ইমেইল অথবা পাসওয়ার্ড ভুল!', 'danger')
 
     return render_template('login.html')
-
+with app.app_context():
+    db.create_all()
