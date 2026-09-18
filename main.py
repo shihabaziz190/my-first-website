@@ -95,3 +95,7 @@ def profile():
         return redirect(url_for('profile'))
 
     return render_template('profile.html', user=user)
+@app.route('/')
+def home():
+    return render_template('index.html')
+
