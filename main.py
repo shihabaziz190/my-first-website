@@ -93,7 +93,7 @@ def register():
         flash('রেজিস্ট্রেশন সফল হয়েছে। এখন লগইন করুন।', 'success')
         return redirect(url_for('login'))
 
-    return render_template('register.html')
+    return render_template('regeister.html')
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
