@@ -185,3 +185,16 @@ def delete_user(user_id):
         flash('আপনি নিজেকে delete করতে পারবেন না!', 'danger')
 
     return redirect(url_for('admin'))
+
+
+@app.route('/admin')
+def admin():
+    if 'user' not in session:
+        flash('অ্যাডমিন প্যানেল দেখতে লগইন করুন।', 'warning')
+        return redirect(url_for('login'))
+
+    if session.get('role') != 'admin':
+        return 'আপনার এই পেজ দেখার অনুমতি নেই!', 403
+
+    users = User.query.order_by(User.id).all()
+    return render_template('admin.html', users=users)
