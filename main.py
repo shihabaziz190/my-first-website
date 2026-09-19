@@ -168,7 +168,7 @@ def admin():
         return redirect(url_for('login'))
 
     if session.get('role') != 'admin':
-        return 'আপনার এই পেজ দেখার অনুমতি নেই!', 403
+ return 'আপনার এই পেজ দেখার অনুমতি নেই!', 403
 
 
 
