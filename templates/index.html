@@ -1,1 +1,55 @@
-<a href="{{ url_for('register') }}">নতুন অ্যাকাউন্ট তৈরি করুন</a>
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>হোম পেজ</title>
+</head>
+<body>
+    <h1>স্বাগতম আমাদের ওয়েবসাইটে!</h1>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <p style="color: {% if category == 'success' %}green{% else %}red{% endif %};">
+                    {{ message }}
+                </p>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    {% if session.get('user') %}
+        <p>
+            আপনি লগইন করেছেন: {{ session.get('user') }}
+            <br>
+            রোল: {{ session.get('role') }}
+        </p>
+
+        {% if session.get('role') == 'admin' %}
+            <p>
+                <a href="{{ url_for('admin') }}">
+                    অ্যাডমিন ড্যাশবোর্ডে যান
+                </a>
+            </p>
+        {% endif %}
+
+        <p>
+            <a href="{{ url_for('profile') }}">প্রোফাইল</a>
+        </p>
+
+        <p>
+            <a href="{{ url_for('logout') }}">লগআউট</a>
+        </p>
+    {% else %}
+        <p>
+            <a href="{{ url_for('login') }}">লগইন করুন</a>
+        </p>
+
+        <p>
+            <a href="{{ url_for('register') }}">
+                নতুন অ্যাকাউন্ট তৈরি করুন
+            </a>
+        </p>
+    {% endif %}
+</body>
+</html>
