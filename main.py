@@ -165,8 +165,9 @@ def profile():
 
     return render_template('profile.html', user=user)
 
-@app.route('/admin')
-def admin():
+
+@app.route('/delete_user/<int:user_id>')
+def delete_user(user_id):
     if 'user' not in session:
         flash('অ্যাডমিন প্যানেল দেখতে লগইন করুন।', 'warning')
         return redirect(url_for('login'))
@@ -174,5 +175,13 @@ def admin():
     if session.get('role') != 'admin':
         return 'আপনার এই পেজ দেখার অনুমতি নেই!', 403
 
-    users = User.query.order_by(User.id).all()
-    return render_template('admin.html', users=users)
+    user = User.query.get_or_404(user_id)
+
+    if user.email != session['user']:
+        db.session.delete(user)
+        db.session.commit()
+        flash('ইউজার মুছে দেওয়া হয়েছে!', 'success')
+    else:
+        flash('আপনি নিজেকে delete করতে পারবেন না!', 'danger')
+
+    return redirect(url_for('admin'))
