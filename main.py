@@ -165,4 +165,13 @@ def profile():
 
     return render_template('profile.html', user=user)
 
+@app.route('/admin')
+def admin():
+    if 'user' not in session:
+        flash('অ্যাডমিন প্যানেল দেখতে লগইন করুন।', 'warning')
+        return redirect(url_for('login'))
 
+    if session.get('role') != 'admin':
+        return 'আপনার এই পেজ দেখার অনুমতি নেই!', 403
+
+    return render_template('admin.html')
