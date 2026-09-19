@@ -36,20 +36,24 @@ class User(db.Model):
 with app.app_context():
     db.create_all()
 
-    admin_email = os.environ.get('ADMIN_EMAIL')
-    admin_password = os.environ.get('ADMIN_PASSWORD')
+    admin_email = os.environ.get('ADMIN_EMAIL', 'admin@gmail.com').strip().lower()
+    admin_password = os.environ.get('ADMIN_PASSWORD', '123456')
 
-    if admin_email and admin_password:
-        existing_admin = User.query.filter_by(email=admin_email).first()
-        if not existing_admin:
-            admin = User(
-                name='Admin',
-                email=admin_email,
-                password=generate_password_hash(admin_password),
-                role='admin'
-            )
-            db.session.add(admin)
-            db.session.commit()
+    existing_admin = User.query.filter_by(email=admin_email).first()
+
+    if existing_admin:
+        existing_admin.role = 'admin'
+        existing_admin.password = generate_password_hash(admin_password)
+        db.session.commit()
+    else:
+        admin = User(
+            name='Admin',
+            email=admin_email,
+            password=generate_password_hash(admin_password),
+            role='admin'
+        )
+        db.session.add(admin)
+        db.session.commit()
 
 @app.route('/')
 def home():
