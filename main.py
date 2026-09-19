@@ -173,4 +173,7 @@ def admin():
     return render_template('admin.html')
 
 
-return render_template('admin.html')
+@app.route('/logout')
+def logout():
+    session.clear()
+    return redirect(url_for('home'))
