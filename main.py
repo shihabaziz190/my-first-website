@@ -165,22 +165,4 @@ def profile():
 
     return render_template('profile.html', user=user)
 
-@app.route('/login', methods=['GET', 'POST'])
-def login():
-    if request.method == 'POST':
-        email = request.form.get('email', '').strip().lower()
-        password = request.form.get('password', '')
-
-        user = User.query.filter_by(email=email).first()
-
-        if user and check_password_hash(user.password, password):
-            session['user'] = user.email
-            session['name'] = user.name
-            session['role'] = user.role
-            return redirect(url_for('home'))
-
-        flash('ইমেইল অথবা পাসওয়ার্ড ভুল!', 'danger')
-
-    return render_template('login.html')
-
 
