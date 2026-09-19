@@ -169,3 +169,4 @@ def admin():
 
     if session.get('role') != 'admin':
         return 'আপনার এই পেজ দেখার অনুমতি নেই!', 403
+return render_template('admin.html')
