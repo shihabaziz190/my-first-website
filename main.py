@@ -165,15 +165,22 @@ def profile():
 
     return render_template('profile.html', user=user)
 
-@app.route('/admin')
-def admin():
-    if 'user' not in session:
-        flash('অ্যাডমিন প্যানেল দেখতে লগইন করুন।', 'warning')
-        return redirect(url_for('login'))
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        email = request.form.get('email', '').strip().lower()
+        password = request.form.get('password', '')
 
-    if session.get('role') != 'admin':
-        return 'আপনার এই পেজ দেখার অনুমতি নেই!', 403
+        user = User.query.filter_by(email=email).first()
 
-    return render_template('admin.html')
+        if user and check_password_hash(user.password, password):
+            session['user'] = user.email
+            session['name'] = user.name
+            session['role'] = user.role
+            return redirect(url_for('home'))
+
+        flash('ইমেইল অথবা পাসওয়ার্ড ভুল!', 'danger')
+
+    return render_template('login.html')
 
 
