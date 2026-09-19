@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="bn">
 <head>
@@ -7,8 +8,27 @@
 <body>
     <h1>অ্যাডমিন ড্যাশবোর্ড</h1>
     <p>এটি শুধুমাত্র অ্যাডমিনদের জন্য সুরক্ষিত পেজ।</p>
-    
-    <a href="/">হোম পেজ</a> | 
+
+    <table border="1" cellpadding="8" cellspacing="0">
+        <tr>
+            <th>ID</th>
+            <th>নাম</th>
+            <th>ইমেইল</th>
+            <th>রোল</th>
+        </tr>
+
+        {% for user in users %}
+        <tr>
+            <td>{{ user.id }}</td>
+            <td>{{ user.name }}</td>
+            <td>{{ user.email }}</td>
+            <td>{{ user.role }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <br>
+    <a href="/">হোম পেজ</a> |
     <a href="/logout">লগআউট</a>
 </body>
 </html>
