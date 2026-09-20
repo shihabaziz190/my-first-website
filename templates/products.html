@@ -1,14 +1,32 @@
 {% extends 'base.html' %}
+
+{% block title %}সকল পণ্য{% endblock %}
+
 {% block content %}
 <h2>সকল পণ্য</h2>
-<div class="grid" style="margin-top: 20px;">
+
+<div class="grid">
     {% for product in products %}
     <div class="card">
-        <img src="{{ product.image }}" alt="{{ product.name }}">
         <h3>{{ product.name }}</h3>
-        <p>৳{{ product.price }}</p>
-        <a href="{{ url_for('add_to_cart', id=product.id) }}" class="btn">কার্টে যোগ করুন</a>
+        <p>{{ product.description }}</p>
+        <p><strong>৳{{ product.price }}</strong></p>
+
+        <a href="{{ url_for('product_detail', product_id=product.id) }}"
+           class="btn">
+            বিস্তারিত
+        </a>
+
+        <form method="post"
+              action="{{ url_for('add_to_cart', product_id=product.id) }}">
+            <input type="number" name="quantity" value="1" min="1">
+            <button type="submit" class="btn">
+                কার্টে যোগ করুন
+            </button>
+        </form>
     </div>
+    {% else %}
+    <p>কোনো পণ্য পাওয়া যায়নি।</p>
     {% endfor %}
 </div>
 {% endblock %}
