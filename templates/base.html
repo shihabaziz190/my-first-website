@@ -1,35 +1,54 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="bn">
 <head>
     <meta charset="UTF-8">
-    <title>E-Commerce Store</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}Hadi Online Shop{% endblock %}</title>
+
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <header>
-        <h1><a href="{{ url_for('home') }}">E-Shop</a></h1>
-        <nav>
-            <a href="{{ url_for('products') }}">সব পণ্য</a>
-            <a href="{{ url_for('cart_page') }}">কার্ট</a>
-            {% if current_user.is_authenticated %}
-                <a href="{{ url_for('profile') }}">প্রোফাইল</a>
-                {% if current_user.is_admin %}<a href="{{ url_for('admin_panel1') }}">অ্যাডমিন</a>{% endif %}
-                <a href="{{ url_for('logout') }}">লগআউট</a>
-            {% else %}
-                <a href="{{ url_for('login') }}">লগইন</a>
-                <a href="{{ url_for('register') }}">রেজিস্ট্রেশন</a>
+
+<header>
+    <h1>
+        <a href="{{ url_for('home') }}">Hadi Online Shop</a>
+    </h1>
+
+    <nav>
+        <a href="{{ url_for('home') }}">হোম</a>
+        <a href="{{ url_for('products') }}">সব পণ্য</a>
+        <a href="{{ url_for('cart_page') }}">
+            কার্ট ({{ cart_count() }})
+        </a>
+
+        {% if session.get('user') %}
+            {% if session.get('role') == 'admin' %}
+                <a href="{{ url_for('admin_panel') }}">অ্যাডমিন</a>
             {% endif %}
-        </nav>
-    </header>
-    <div class="container">
-        {% with messages = get_flashed_messages(with_categories=true) %}
-            {% if messages %}
-                {% for category, message in messages %}
-                    <div class="alert">{{ message }}</div>
-                {% endfor %}
-            {% endif %}
-        {% endwith %}
-        {% block content %}{% endblock %}
-    </div>
+
+            <a href="{{ url_for('logout') }}">লগআউট</a>
+        {% else %}
+            <a href="{{ url_for('login') }}">লগইন</a>
+            <a href="{{ url_for('register') }}">রেজিস্ট্রেশন</a>
+        {% endif %}
+    </nav>
+</header>
+
+<main class="container">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% for category, message in messages %}
+            <div class="alert {{ category }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endwith %}
+
+    {% block content %}{% endblock %}
+</main>
+
+<footer>
+    <p>© 2026 Hadi Online Shop</p>
+</footer>
+
 </body>
 </html>
