@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block content %}
+<div style="display: flex; gap: 30px; background: #fff; padding: 20px;">
+    <img src="{{ product.image }}" style="max-width: 300px;">
+    <div>
+        <h2>{{ product.name }}</h2>
+        <h3>মূল্য: ৳{{ product.price }}</h3>
+        <p style="margin: 15px 0;">{{ product.description }}</p>
+        <a href="{{ url_for('add_to_cart', id=product.id) }}" class="btn">কার্টে যোগ করুন</a>
+    </div>
+</div>
+{% endblock %}
