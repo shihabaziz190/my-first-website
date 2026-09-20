@@ -1,20 +1,29 @@
 {% extends 'base.html' %}
+
+{% block title %}কার্ট{% endblock %}
+
 {% block content %}
 <h2>আপনার শপিং কার্ট</h2>
-{% if cart_items %}
-<table>
-    <tr><th>পণ্য</th><th>পরিমাণ</th><th>মোট</th></tr>
-    {% for item in cart_items %}
-    <tr>
-        <td>{{ item.product.name }}</td>
-        <td>{{ item.quantity }}</td>
-        <td>৳{{ item.total }}</td>
-    </tr>
+
+{% if items %}
+    {% for product, quantity in items %}
+    <div class="card">
+        <h3>{{ product.name }}</h3>
+        <p>পরিমাণ: {{ quantity }}</p>
+        <p>মোট: ৳{{ product.price * quantity }}</p>
+
+        <a href="{{ url_for('remove_from_cart', product_id=product.id) }}">
+            মুছুন
+        </a>
+    </div>
     {% endfor %}
-</table>
-<h3>সর্বমোট: ৳{{ total }}</h3>
-<a href="{{ url_for('checkout') }}" class="btn">চেকআউট করুন</a>
+
+    <h3>সর্বমোট: ৳{{ total }}</h3>
+
+    <a href="{{ url_for('checkout') }}" class="btn">
+        চেকআউট করুন
+    </a>
 {% else %}
-<p>কার্ট খালি রয়েছে।</p>
+    <p>কার্ট খালি রয়েছে।</p>
 {% endif %}
 {% endblock %}
