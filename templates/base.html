@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <title>E-Commerce Store</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <h1><a href="{{ url_for('index') }}">E-Shop</a></h1>
+        <nav>
+            <a href="{{ url_for('products') }}">সব পণ্য</a>
+            <a href="{{ url_for('cart') }}">কার্ট</a>
+            {% if current_user.is_authenticated %}
+                <a href="{{ url_for('profile') }}">প্রোফাইল</a>
+                {% if current_user.is_admin %}<a href="{{ url_for('admin') }}">অ্যাডমিন</a>{% endif %}
+                <a href="{{ url_for('logout') }}">লগআউট</a>
+            {% else %}
+                <a href="{{ url_for('login') }}">লগইন</a>
+                <a href="{{ url_for('register') }}">রেজিস্ট্রেশন</a>
+            {% endif %}
+        </nav>
+    </header>
+    <div class="container">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        {% block content %}{% endblock %}
+    </div>
+</body>
+</html>
