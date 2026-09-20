@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>সকল পণ্য</h2>
+<div class="grid" style="margin-top: 20px;">
+    {% for product in products %}
+    <div class="card">
+        <img src="{{ product.image }}" alt="{{ product.name }}">
+        <h3>{{ product.name }}</h3>
+        <p>৳{{ product.price }}</p>
+        <a href="{{ url_for('add_to_cart', id=product.id) }}" class="btn">কার্টে যোগ করুন</a>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
