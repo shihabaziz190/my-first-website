@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{% block title %}Hadi Online Shop{% endblock %}</title>
-
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
@@ -17,15 +16,12 @@
     <nav>
         <a href="{{ url_for('home') }}">হোম</a>
         <a href="{{ url_for('products') }}">সব পণ্য</a>
-        <a href="{{ url_for('cart_page') }}">
-            কার্ট ({{ cart_count() }})
-        </a>
+        <a href="{{ url_for('cart_page') }}">কার্ট ({{ cart_count() }})</a>
 
         {% if session.get('user') %}
             {% if session.get('role') == 'admin' %}
                 <a href="{{ url_for('admin_panel') }}">অ্যাডমিন</a>
             {% endif %}
-
             <a href="{{ url_for('logout') }}">লগআউট</a>
         {% else %}
             <a href="{{ url_for('login') }}">লগইন</a>
@@ -37,9 +33,7 @@
 <main class="container">
     {% with messages = get_flashed_messages(with_categories=true) %}
         {% for category, message in messages %}
-            <div class="alert {{ category }}">
-                {{ message }}
-            </div>
+            <div class="alert {{ category }}">{{ message }}</div>
         {% endfor %}
     {% endwith %}
 
