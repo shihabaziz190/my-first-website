@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}অর্ডার সফল{% endblock %}
+
+{% block content %}
+<div class="card">
+    <h2>অর্ডার সফল হয়েছে ✅</h2>
+    <p>অর্ডার নম্বর: #{{ order.id }}</p>
+    <p>মোট মূল্য: ৳{{ order.total }}</p>
+
+    <a href="{{ url_for('products') }}" class="btn">
+        আরও শপিং করুন
+    </a>
+</div>
+{% endblock %}
