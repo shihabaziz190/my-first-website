@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>অর্ডার ফর্ম</h2>
+<form method="POST" style="max-width: 400px; background: #fff; padding: 20px;">
+    <label>ডেলিভারি ঠিকানা</label>
+    <textarea name="address" required></textarea>
+    <button type="submit" class="btn">অর্ডার নিশ্চিত করুন</button>
+</form>
+{% endblock %}
