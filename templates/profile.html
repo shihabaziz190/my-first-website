@@ -1,39 +1,17 @@
-<!DOCTYPE html>
-<html lang="bn">
-<head>
-    <meta charset="UTF-8">
-    <title>রেজিস্ট্রেশন</title>
-</head>
-<body>
-    <h2>নতুন অ্যাকাউন্ট তৈরি করুন</h2>
+{% extends 'base.html' %}
+{% block content %}
+<h2>প্রোফাইল: {{ current_user.username }}</h2>
+<p>ইমেইল: {{ current_user.email }}</p>
 
-    {% with messages = get_flashed_messages(with_categories=true) %}
-        {% if messages %}
-            {% for category, message in messages %}
-                <p style="color: {% if category == 'success' %}green{% else %}red{% endif %};">
-                    {{ message }}
-                </p>
-            {% endfor %}
-        {% endif %}
-    {% endwith %}
-
-    <form action="{{ url_for('register') }}" method="POST">
-        <label for="name">নাম:</label><br>
-        <input type="text" id="name" name="name" required><br><br>
-
-        <label for="email">ইমেইল:</label><br>
-        <input type="email" id="email" name="email" required><br><br>
-
-        <label for="password">পাসওয়ার্ড:</label><br>
-        <input type="password" id="password" name="password" required><br><br>
-
-        <label for="confirm_password">পুনরায় পাসওয়ার্ড:</label><br>
-        <input type="password" id="confirm_password" name="confirm_password" required><br><br>
-
-        <button type="submit">রেজিস্ট্রেশন করুন</button>
-    </form>
-
-    <p><a href="{{ url_for('login') }}">আগে থেকেই অ্যাকাউন্ট আছে? লগইন করুন</a></p>
-    <p><a href="{{ url_for('home') }}">হোমে ফিরে যান</a></p>
-</body>
-</html>
+<h3 style="margin-top: 20px;">আপনার অর্ডার ইতিহাস</h3>
+{% if orders %}
+<table>
+    <tr><th>অর্ডার ID</th><th>মোট টাকা</th><th>ঠিকানা</th></tr>
+    {% for order in orders %}
+    <tr><td>#{{ order.id }}</td><td>৳{{ order.total_price }}</td><td>{{ order.address }}</td></tr>
+    {% endfor %}
+</table>
+{% else %}
+<p>এখনো কোনো অর্ডার করা হয়নি।</p>
+{% endif %}
+{% endblock %}
