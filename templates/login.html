@@ -1,30 +1,9 @@
-<!DOCTYPE html>
-<html lang="bn">
-<head>
-    <meta charset="UTF-8">
-    <title>লগইন</title>
-</head>
-<body>
-    <h2>লগইন ফর্ম</h2>
-
-    {% with messages = get_flashed_messages(with_categories=true) %}
-      {% if messages %}
-        {% for category, message in messages %}
-          <p style="color: red;">{{ message }}</p>
-        {% endfor %}
-      {% endif %}
-    {% endwith %}
-
-    <form action="/login" method="POST">
-        <label for="email">ইমেইল:</label><br>
-        <input type="email" id="email" name="email" required><br><br>
-        
-        <label for="password">পাসওয়ার্ড:</label><br>
-        <input type="password" id="password" name="password" required><br><br>
-        
-        <button type="submit">লগইন</button>
-    </form>
-    
-    <p><a href="/">হোমে ফিরে যান</a></p>
-</body>
-</html>
+{% extends 'base.html' %}
+{% block content %}
+<h2>লগইন করুন</h2>
+<form method="POST" style="max-width: 400px; background: #fff; padding: 20px;">
+    <input type="email" name="email" placeholder="ইমেইল" required>
+    <input type="password" name="password" placeholder="পাসওয়ার্ড" required>
+    <button type="submit" class="btn">লগইন</button>
+</form>
+{% endblock %}
