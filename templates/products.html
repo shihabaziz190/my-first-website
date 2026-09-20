@@ -1,37 +1,39 @@
 {% extends 'base.html' %}
 
-{% block title %}সকল পণ্য{% endblock %}
+{% block title %}{{ product.name }}{% endblock %}
 
 {% block content %}
-<h2>সকল পণ্য</h2>
+<div class="card">
+    {% if product.image %}
+    <img
+        src="{{ product.image }}"
+        alt="{{ product.name }}"
+        style="width: 100%; max-width: 400px; height: 280px; object-fit: cover; border-radius: 10px;"
+    >
+    {% endif %}
 
-<div class="grid">
-    {% for product in products %}
-    <div class="card">
-<img
-    src="{{ product.image }}"
-    alt="{{ product.name }}"
-    style="width: 100%; height: 220px; object-fit: cover; border-radius: 10px;"
->
-        <h3>{{ product.name }}</h3>
-        <p>{{ product.description }}</p>
-        <p><strong>৳{{ product.price }}</strong></p>
+    <h2>{{ product.name }}</h2>
 
-        <a href="{{ url_for('product_detail', product_id=product.id) }}"
-           class="btn">
-            বিস্তারিত
-        </a>
+    <p>{{ product.description }}</p>
 
-        <form method="post"
-              action="{{ url_for('add_to_cart', product_id=product.id) }}">
-            <input type="number" name="quantity" value="1" min="1">
-            <button type="submit" class="btn">
-                কার্টে যোগ করুন
-            </button>
-        </form>
-    </div>
-    {% else %}
-    <p>কোনো পণ্য পাওয়া যায়নি।</p>
-    {% endfor %}
+    <h3>মূল্য: ৳{{ product.price }}</h3>
+
+    {% if product.stock is defined %}
+    <p>স্টক: {{ product.stock }}</p>
+    {% endif %}
+
+    <form method="post"
+          action="{{ url_for('add_to_cart', product_id=product.id) }}">
+        <input
+            type="number"
+            name="quantity"
+            value="1"
+            min="1"
+        >
+
+        <button type="submit" class="btn">
+            কার্টে যোগ করুন
+        </button>
+    </form>
 </div>
 {% endblock %}
