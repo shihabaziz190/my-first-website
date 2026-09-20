@@ -1,46 +1,19 @@
-<!DOCTYPE html>
-<html lang="bn">
-<head>
-    <meta charset="UTF-8">
-    <title>অ্যাডমিন প্যানেল</title>
-</head>
-<body>
-    <h1>অ্যাডমিন ড্যাশবোর্ড</h1>
-    <p>এটি শুধুমাত্র অ্যাডমিনদের জন্য সুরক্ষিত পেজ।</p>
+{% extends 'base.html' %}
+{% block content %}
+<h2>অ্যাডমিন প্যানেল - নতুন পণ্য যোগ করুন</h2>
+<form method="POST" style="max-width: 500px; background: #fff; padding: 20px; margin-bottom: 30px;">
+    <input type="text" name="name" placeholder="পণ্যের নাম" required>
+    <input type="number" step="0.01" name="price" placeholder="দাম" required>
+    <input type="text" name="image" placeholder="ইমেজ URL">
+    <textarea name="description" placeholder="বিবরণ" required></textarea>
+    <button type="submit" class="btn">যোগ করুন</button>
+</form>
 
-    <h2>Registered Users</h2>
-
-    <table border="1" cellpadding="8" cellspacing="0">
-        <tr>
-            <th>ID</th>
-            <th>নাম</th>
-            <th>ইমেইল</th>
-            <th>রোল</th>
-            <th>অ্যাকশন</th>
-        </tr>
-
-        {% for user in users %}
-        <tr>
-            <td>{{ user.id }}</td>
-            <td>{{ user.name }}</td>
-            <td>{{ user.email }}</td>
-            <td>{{ user.role }}</td>
-            <td>
-                {% if user.email != session.get('user') %}
-                    <a href="{{ url_for('delete_user', user_id=user.id) }}"
-                       onclick="return confirm('আপনি কি নিশ্চিত?')">
-                       Delete
-                    </a>
-                {% else %}
-                    -
-                {% endif %}
-            </td>
-        </tr>
-        {% endfor %}
-    </table>
-
-    <br>
-    <a href="/">হোম পেজ</a> |
-    <a href="/logout">লগআউট</a>
-</body>
-</html>
+<h3>বিদ্যমান পণ্যসমূহ</h3>
+<table>
+    <tr><th>ID</th><th>নাম</th><th>দাম</th></tr>
+    {% for product in products %}
+    <tr><td>{{ product.id }}</td><td>{{ product.name }}</td><td>৳{{ product.price }}</td></tr>
+    {% endfor %}
+</table>
+{% endblock %}
