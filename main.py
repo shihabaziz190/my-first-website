@@ -32,6 +32,7 @@ class Product(db.Model):
     category = db.Column(db.String(60), nullable=False)
     price = db.Column(db.Float, nullable=False)
     stock = db.Column(db.Integer, default=0)
+    image = db.Column(db.String(500), nullable=True)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
 
 
@@ -75,12 +76,12 @@ def is_admin():
 def seed_products():
     if Product.query.count() == 0:
         products = [
-            Product(name='Smart Watch Pro', description='Premium smartwatch for daily fitness tracking and notification alerts.', category='Electronics', price=149.99, stock=12),
-            Product(name='Wireless Earbuds X', description='Crisp sound, noise cancellation, and long battery life.', category='Electronics', price=89.99, stock=18),
-            Product(name='Urban Denim Jacket', description='Modern casual jacket for all-day comfort and style.', category='Clothing', price=79.00, stock=9),
-            Product(name='Classic White Sneakers', description='Lightweight everyday sneakers built for comfort.', category='Clothing', price=64.00, stock=15),
-            Product(name='Bluetooth Speaker Mini', description='Portable speaker with rich bass and compact size.', category='Electronics', price=59.99, stock=20),
-            Product(name='Casual Hoodie', description='Soft and stylish hoodie for daily wear.', category='Clothing', price=48.50, stock=25),
+            Product(name='Smart Watch Pro', description='Premium smartwatch for daily fitness tracking and notification alerts.', category='Electronics', price=149.99, stock=12, image='https://images.unsplash.com/photo-1546868871-7041f2a55e12?w=800'),
+            Product(name='Wireless Earbuds X', description='Crisp sound, noise cancellation, and long battery life.', category='Electronics', price=89.99, stock=18, image='https://images.unsplash.com/photo-1590658268037-6bf12165a8df?w=800'),
+            Product(name='Urban Denim Jacket', description='Modern casual jacket for all-day comfort and style.', category='Clothing', price=79.00, stock=9, image='https://images.unsplash.com/photo-1551028719-00167b16eac5?w=800'),
+            Product(name='Classic White Sneakers', description='Lightweight everyday sneakers built for comfort.', category='Clothing', price=64.00, stock=15, image='https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=800'),
+            Product(name='Bluetooth Speaker Mini', description='Portable speaker with rich bass and compact size.', category='Electronics', price=59.99, stock=20, image='https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?w=800'),
+            Product(name='Casual Hoodie', description='Soft and stylish hoodie for daily wear.', category='Clothing', price=48.50, stock=25, image='https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=800'),
         ]
         db.session.add_all(products)
         db.session.commit()
@@ -263,6 +264,7 @@ def admin_panel():
         category = request.form.get('category', '').strip()
         price = float(request.form.get('price', 0))
         stock = int(request.form.get('stock', 0))
+        image = request.form.get('image', '').strip()
 
         if not name or not description or not category:
             flash('সব তথ্য পূরণ করুন!', 'danger')
@@ -274,6 +276,7 @@ def admin_panel():
             category=category,
             price=price,
             stock=stock,
+            image=image or None,
         ))
         db.session.commit()
         flash('নতুন পণ্য যোগ হয়েছে!', 'success')
