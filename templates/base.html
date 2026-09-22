@@ -1,48 +1,43 @@
-<!doctype html>
-<html lang="bn">
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{% block title %}Hadi Online Shop{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Storefront</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-
-<header>
-    <h1>
-        <a href="{{ url_for('home') }}">Hadi Online Shop</a>
-    </h1>
-
-    <nav>
-        <a href="{{ url_for('home') }}">হোম</a>
-        <a href="{{ url_for('products') }}">সব পণ্য</a>
-        <a href="{{ url_for('cart_page') }}">কার্ট ({{ cart_count() }})</a>
-
-        {% if session.get('user') %}
-            {% if session.get('role') == 'admin' %}
-                <a href="{{ url_for('admin_panel') }}">অ্যাডমিন</a>
+    <header class="navbar">
+        <div class="logo"><a href="{{ url_for('index') }}">StoreFront</a></div>
+        <nav>
+            <a href="{{ url_for('index') }}">Home</a>
+            <a href="{{ url_for('products') }}">Products</a>
+            <a href="{{ url_for('cart') }}">Cart ({{ cart_count }})</a>
+            {% if session.get('user') %}
+                {% if session.get('user') == 'admin@shop.com' %}
+                    <a href="{{ url_for('admin') }}">Admin</a>
+                {% endif %}
+                <a href="{{ url_for('logout') }}">Logout</a>
+            {% else %}
+                <a href="{{ url_for('auth') }}">Login</a>
             {% endif %}
-            <a href="{{ url_for('logout') }}">লগআউট</a>
-        {% else %}
-            <a href="{{ url_for('login') }}">লগইন</a>
-            <a href="{{ url_for('register') }}">রেজিস্ট্রেশন</a>
-        {% endif %}
-    </nav>
-</header>
+        </nav>
+    </header>
 
-<main class="container">
-    {% with messages = get_flashed_messages(with_categories=true) %}
-        {% for category, message in messages %}
-            <div class="alert {{ category }}">{{ message }}</div>
-        {% endfor %}
-    {% endwith %}
+    <div class="container">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
 
-    {% block content %}{% endblock %}
-</main>
+        {% block content %}{% endblock %}
+    </div>
 
-<footer>
-    <p>© 2026 Hadi Online Shop</p>
-</footer>
-
+    <footer>
+        <p>&copy; 2026 StoreFront E-Commerce. All rights reserved.</p>
+    </footer>
 </body>
 </html>
