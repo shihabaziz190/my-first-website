@@ -1,29 +1,40 @@
 {% extends 'base.html' %}
 
-{% block title %}কার্ট{% endblock %}
-
 {% block content %}
-<h2>আপনার শপিং কার্ট</h2>
+<h1>Your Cart</h1>
 
 {% if items %}
-    {% for product, quantity in items %}
-    <div class="card">
-        <h3>{{ product.name }}</h3>
-        <p>পরিমাণ: {{ quantity }}</p>
-        <p>মোট: ৳{{ product.price * quantity }}</p>
-
-        <a href="{{ url_for('remove_from_cart', product_id=product.id) }}">
-            মুছুন
-        </a>
+<form action="{{ url_for('update_cart') }}" method="POST">
+    <table class="cart-table">
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Subtotal</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in items %}
+            <tr>
+                <td>{{ item.product.name }}</td>
+                <td>${{ "%.2f"|format(item.product.price) }}</td>
+                <td>
+                    <input type="number" name="qty_{{ item.product.id }}" value="{{ item.qty }}" min="0">
+                </td>
+                <td>${{ "%.2f"|format(item.subtotal) }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    
+    <div class="cart-summary">
+        <h3>Total: ${{ "%.2f"|format(total) }}</h3>
+        <button type="submit" class="btn-secondary">Update Cart</button>
+        <a href="{{ url_for('checkout') }}" class="btn">Proceed to Checkout</a>
     </div>
-    {% endfor %}
-
-    <h3>সর্বমোট: ৳{{ total }}</h3>
-
-    <a href="{{ url_for('checkout') }}" class="btn">
-        চেকআউট করুন
-    </a>
+</form>
 {% else %}
-    <p>কার্ট খালি রয়েছে।</p>
+<p>Your cart is empty. <a href="{{ url_for('products') }}">Continue shopping</a>.</p>
 {% endif %}
 {% endblock %}
