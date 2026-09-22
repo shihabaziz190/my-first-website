@@ -1,30 +1,21 @@
 {% extends 'base.html' %}
 
-{% block title %}Home | Hadi Online Shop{% endblock %}
-
 {% block content %}
-<section class="hero">
-    <h2>Hadi Online Shop-এ স্বাগতম</h2>
-    <p>সেরা পণ্য, সহজ অর্ডার এবং দ্রুত ডেলিভারি।</p>
-    <a href="{{ url_for('products') }}" class="btn">সব পণ্য দেখুন</a>
-</section>
+<div class="hero">
+    <h1>Welcome to hadielectromart</h1>
+    <p>Discover our curated collection of premium essentials.</p>
+    <a href="{{ url_for('products') }}" class="btn">Shop Now</a>
+</div>
 
-<h2>জনপ্রিয় পণ্য</h2>
-
-<div class="grid">
+<h2>Featured Products</h2>
+<div class="product-grid">
     {% for product in products %}
-    <div class="card">
+    <div class="product-card">
+        <img src="{{ product.image }}" alt="{{ product.name }}">
         <h3>{{ product.name }}</h3>
-        <p>{{ product.description }}</p>
-        <p><strong>৳{{ product.price }}</strong></p>
-
-        <a href="{{ url_for('product_detail', product_id=product.id) }}"
-           class="btn">
-            বিস্তারিত
-        </a>
+        <p class="price">${{ "%.2f"|format(product.price) }}</p>
+        <a href="{{ url_for('product', product_id=product.id) }}" class="btn-secondary">View Product</a>
     </div>
-    {% else %}
-    <p>কোনো পণ্য পাওয়া যায়নি।</p>
     {% endfor %}
 </div>
 {% endblock %}
