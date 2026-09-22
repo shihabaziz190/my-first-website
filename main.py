@@ -11,7 +11,7 @@ PRODUCTS = [
     {"id": 3, "name": "Leather Backpack", "price": 85.0, "category": "Bags", "image": "https://via.placeholder.com/300", "description": "Durable handcrafted genuine leather."},
 ]
 
-USERS = {"admin@shop.com": {"password": "adminpassword", "role": "admin"}}
+USERS = {"admin@.com": {"password": "123456", "role": "admin"}}
 
 def admin_required(f):
     @wraps(f)
