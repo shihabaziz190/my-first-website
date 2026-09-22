@@ -1,39 +1,23 @@
 {% extends 'base.html' %}
 
-{% block title %}{{ product.name }}{% endblock %}
-
 {% block content %}
-<div class="card">
-    {% if product.image %}
-    <img
-        src="{{ product.image }}"
-        alt="{{ product.name }}"
-        style="width: 100%; max-width: 400px; height: 280px; object-fit: cover; border-radius: 10px;"
-    >
-    {% endif %}
+<h1>All Products</h1>
 
-    <h2>{{ product.name }}</h2>
+<div class="filters">
+    <a href="{{ url_for('products') }}">All</a> |
+    <a href="{{ url_for('products', category='Accessories') }}">Accessories</a> |
+    <a href="{{ url_for('products', category='Electronics') }}">Electronics</a> |
+    <a href="{{ url_for('products', category='Bags') }}">Bags</a>
+</div>
 
-    <p>{{ product.description }}</p>
-
-    <h3>মূল্য: ৳{{ product.price }}</h3>
-
-    {% if product.stock is defined %}
-    <p>স্টক: {{ product.stock }}</p>
-    {% endif %}
-
-    <form method="post"
-          action="{{ url_for('add_to_cart', product_id=product.id) }}">
-        <input
-            type="number"
-            name="quantity"
-            value="1"
-            min="1"
-        >
-
-        <button type="submit" class="btn">
-            কার্টে যোগ করুন
-        </button>
-    </form>
+<div class="product-grid">
+    {% for product in products %}
+    <div class="product-card">
+        <img src="{{ product.image }}" alt="{{ product.name }}">
+        <h3>{{ product.name }}</h3>
+        <p class="price">${{ "%.2f"|format(product.price) }}</p>
+        <a href="{{ url_for('product', product_id=product.id) }}" class="btn-secondary">View Details</a>
+    </div>
+    {% endfor %}
 </div>
 {% endblock %}
