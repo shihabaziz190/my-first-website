@@ -1,9 +1,23 @@
 {% extends 'base.html' %}
+
 {% block content %}
-<h2>অর্ডার ফর্ম</h2>
-<form method="POST" style="max-width: 400px; background: #fff; padding: 20px;">
-    <label>ডেলিভারি ঠিকানা</label>
-    <textarea name="address" required></textarea>
-    <button type="submit" class="btn">অর্ডার নিশ্চিত করুন</button>
+<h1>Checkout</h1>
+<p>Total Amount Due: <strong>${{ "%.2f"|format(total) }}</strong></p>
+
+<form action="{{ url_for('checkout') }}" method="POST" class="form-container">
+    <h2>Shipping Details</h2>
+    <input type="text" placeholder="Full Name" required>
+    <input type="email" placeholder="Email Address" required>
+    <input type="text" placeholder="Address" required>
+    <input type="text" placeholder="City" required>
+    
+    <h2>Payment Information</h2>
+    <input type="text" placeholder="Card Number" required>
+    <div class="form-row">
+        <input type="text" placeholder="MM/YY" required>
+        <input type="text" placeholder="CVC" required>
+    </div>
+    
+    <button type="submit" class="btn">Place Order</button>
 </form>
 {% endblock %}
