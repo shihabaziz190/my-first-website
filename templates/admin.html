@@ -1,19 +1,37 @@
 {% extends 'base.html' %}
+
 {% block content %}
-<h2>অ্যাডমিন প্যানেল - নতুন পণ্য যোগ করুন</h2>
-<form method="POST" style="max-width: 500px; background: #fff; padding: 20px; margin-bottom: 30px;">
-    <input type="text" name="name" placeholder="পণ্যের নাম" required>
-    <input type="number" step="0.01" name="price" placeholder="দাম" required>
-    <input type="text" name="image" placeholder="ইমেজ URL">
-    <textarea name="description" placeholder="বিবরণ" required></textarea>
-    <button type="submit" class="btn">যোগ করুন</button>
+<h1>Admin Dashboard</h1>
+
+<h2>Add New Product</h2>
+<form action="{{ url_for('admin') }}" method="POST" class="form-container">
+    <input type="text" name="name" placeholder="Product Name" required>
+    <input type="number" step="0.01" name="price" placeholder="Price" required>
+    <input type="text" name="category" placeholder="Category" required>
+    <input type="text" name="image" placeholder="Image URL (optional)">
+    <textarea name="description" placeholder="Product Description" required></textarea>
+    <button type="submit" class="btn">Add Product</button>
 </form>
 
-<h3>বিদ্যমান পণ্যসমূহ</h3>
-<table>
-    <tr><th>ID</th><th>নাম</th><th>দাম</th></tr>
-    {% for product in products %}
-    <tr><td>{{ product.id }}</td><td>{{ product.name }}</td><td>৳{{ product.price }}</td></tr>
-    {% endfor %}
+<h2>Current Inventory</h2>
+<table class="cart-table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Category</th>
+            <th>Price</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for product in products %}
+        <tr>
+            <td>{{ product.id }}</td>
+            <td>{{ product.name }}</td>
+            <td>{{ product.category }}</td>
+            <td>${{ "%.2f"|format(product.price) }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
 </table>
 {% endblock %}
