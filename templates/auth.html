@@ -1,36 +1,17 @@
 {% extends 'base.html' %}
 
-{% block title %}
-{{ 'রেজিস্ট্রেশন' if register else 'লগইন' }}
-{% endblock %}
-
 {% block content %}
-<div class="card">
-    <h2>{{ 'নতুন অ্যাকাউন্ট খুলুন' if register else 'লগইন করুন' }}</h2>
-
-    <form method="post">
-        {% if register %}
-        <input type="text" name="name" placeholder="নাম" required>
-        {% endif %}
-
-        <input type="email" name="email" placeholder="ইমেইল" required>
-        <input type="password" name="password" placeholder="পাসওয়ার্ড" required>
-
-        <button type="submit" class="btn">
-            {{ 'রেজিস্টার' if register else 'লগইন' }}
-        </button>
+<div class="form-container">
+    <h1>Account Login</h1>
+    <form action="{{ url_for('auth') }}" method="POST">
+        <label for="email">Email</label>
+        <input type="email" name="email" id="email" required>
+        
+        <label for="password">Password</label>
+        <input type="password" name="password" id="password" required>
+        
+        <button type="submit" class="btn">Login</button>
     </form>
-
-    {% if register %}
-    <p>
-        আগে থেকেই অ্যাকাউন্ট আছে?
-        <a href="{{ url_for('login') }}">লগইন করুন</a>
-    </p>
-    {% else %}
-    <p>
-        অ্যাকাউন্ট নেই?
-        <a href="{{ url_for('register') }}">রেজিস্ট্রেশন করুন</a>
-    </p>
-    {% endif %}
+    <p>Admin credentials: <code>admin@shop.com</code> / <code>adminpassword</code></p>
 </div>
 {% endblock %}
