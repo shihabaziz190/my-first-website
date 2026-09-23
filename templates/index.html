@@ -142,7 +142,7 @@
                 <i class="fa-solid fa-phone"></i>
                 <div>
                     <h4>ফোন</h4>
-                    <p>+৮৮০ ১৭০০ ০০০০০০</p>
+                    <p>+8801843175676</p>
                 </div>
             </div>
         </div>
@@ -233,7 +233,33 @@
     <!-- ৭. স্লাইড-আউট কার্ট ড্রয়ার (Cart Drawer Modal) -->
     <div class="cart-drawer" id="cartDrawer"><!-- ৯. চেকআউট পপ-আপ মডাল (Checkout Modal) -->
 <div class="checkout-modal-overlay" id="checkoutModal">
+    <div class="checkout-modal"><!-- ১০. লগইন পপ-আপ মডাল (Login Modal) -->
+<div class="checkout-modal-overlay" id="loginModal">
     <div class="checkout-modal">
+        <div class="checkout-header">
+            <h3><i class="fa-solid fa-user-lock"></i> অ্যাকাউন্টে লগইন করুন</h3>
+            <button class="close-modal" id="closeLoginModal">&times;</button>
+        </div>
+        <form id="loginForm" novalidate>
+            <div class="checkout-body">
+                <div class="form-group">
+                    <label for="loginEmail">ইমেইল বা ফোন নম্বর *</label>
+                    <input type="text" id="loginEmail" placeholder="example@mail.com বা 017XXXXXXXX">
+                    <small class="error-message" id="loginEmailError"></small>
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">পাসওয়ার্ড *</label>
+                    <input type="password" id="loginPassword" placeholder="******">
+                    <small class="error-message" id="loginPasswordError"></small>
+                </div>
+            </div>
+            <div class="checkout-footer">
+                <button type="submit" class="confirm-order-btn">লগইন করুন <i class="fa-solid fa-right-to-bracket"></i></button>
+            </div>
+        </form>
+    </div>
+</div>
+
         <div class="checkout-header">
             <h3><i class="fa-solid fa-bag-shopping"></i> অর্ডারের তথ্য ও পেমেন্ট</h3>
             <button class="close-modal" id="closeCheckoutModal">&times;</button>
