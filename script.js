@@ -246,53 +246,18 @@ if (contactForm) {
     });
 }
 // ==========================================
-// ৯. লগইন পপ-আপ লজিক (Login Modal Logic)
-// ==========================================
-const loginModal = document.getElementById('loginModal');
-const closeLoginModal = document.getElementById('closeLoginModal');
-const accountBtn = document.querySelector('a:has(.fa-user), .account-btn'); // অ্যাকাউন্ট বাটন selector
 
-// অ্যাকাউন্ট বাটনে ক্লিক করলে লগইন মডাল খুলবে
-if (accountBtn) {
-    accountBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        loginModal.classList.add('active');
-    });
-}
-
-// বন্ধ করার বাটন
-if (closeLoginModal) {
-    closeLoginModal.addEventListener('click', () => {
-        loginModal.classList.remove('active');
-    });
-}
-
-// লগইন ফর্ম সাবমিট
 const loginForm = document.getElementById('loginForm');
+
 if (loginForm) {
-    loginForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        
+    loginForm.addEventListener('submit', function (e) {
         const email = document.getElementById('loginEmail').value.trim();
         const password = document.getElementById('loginPassword').value.trim();
-        
-        if (!email) {
-            document.getElementById('loginEmailError').innerText = 'ইমেইল বা ফোন নম্বর দিন।';
-            return;
-        } else {
-            document.getElementById('loginEmailError').innerText = '';
+
+        if (!email || !password) {
+            e.preventDefault();
+            alert('ইমেইল এবং পাসওয়ার্ড দিন।');
         }
-        
-        if (!password) {
-            document.getElementById('loginPasswordError').innerText = 'পাসওয়ার্ড দিন।';
-            return;
-        } else {
-            document.getElementById('loginPasswordError').innerText = '';
-        }
-        
-        // ডামি সফলতা মেসেজ (এখানে ব্যাকএন্ড API রিকোয়েস্ট বসবে)
-        alert('সফলভাবে লগইন হয়েছে!');
-        loginModal.classList.remove('active');
-        loginForm.reset();
+        // তথ্য ঠিক থাকলে form স্বাভাবিকভাবে /auth-এ submit হবে
     });
 }
