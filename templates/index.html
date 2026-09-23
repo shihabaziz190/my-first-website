@@ -1,363 +1,84 @@
-<!DOCTYPE html>
-<html lang="bn">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My E-Commerce Shop</title>
-    <!-- FontAwesome for Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
+{% extends 'base.html' %}
 
-    <!-- ১. নেভিগেশন বার (Navbar) -->
-    <header class="navbar">
-        <div class="logo">
-            <a href="#">ShopLogo</a>
-        </div>
-        <div class="search-bar">
-            <input type="text" placeholder="পণ্য খুঁজুন (e.g. Shoes, Watch)...">
-            <button><i class="fa-solid => fa-magnifying-glass"></i></button>
-        </div>
-        <div class="nav-icons">
-            <a href="#" class="nav-item"><i class="fa-regular fa-user"></i> অ্যাকাউন্ট</a>
-            <a href="#" class="nav-item"><i class="fa-regular fa-heart"></i> উইশলিস্ট</a>
-            <a href="#" class="nav-item cart-btn" id="cartBtn">
-                <i class="fa-solid fa-cart-shopping"></i> কার্ট
-                <span class="cart-count" id="cartCount">0</span>
-            </a>
-        </div>
-    </header>
+{% block content %}
 
-    <!-- ২. হিরো সেকশন (Hero Banner) -->
-    <section class="hero-banner">
-        <div class="hero-content">
-            <h1>ধামাকা ঈদ অফার!</h1>
-            <p>সকল ফ্যাশন আইটেমে ৫০% পর্যন্ত ছাড়। সীমিত সময়ের জন্য!</p>
-            <a href="#products" class="btn-primary">এখনই কিনুন</a>
-        </div>
-    </section>
-
-    <!-- ৩. ক্যাটাগরি সেকশন (Categories) -->
-    <section class="categories">
-        <h2>পপুলার ক্যাটাগরি</h2>
-        <div class="category-grid">
-            <div class="category-card">
-                <i class="fa-solid fa-mobile-screen-button"></i>
-                <h3>ইলেকট্রনিক্স</h3>
-            </div>
-            <div class="category-card">
-                <i class="fa-solid fa-shirt"></i>
-                <h3>ফ্যাশন</h3>
-            </div>
-            <div class="category-card">
-                <i class="fa-solid fa-shoe-prints"></i>
-                <h3>জুতো</h3>
-            </div>
-            <div class="category-card">
-                <i class="fa-solid fa-clock"></i>
-                <h3>ঘড়ি</h3>
-            </div>
-        </div>
-    </section>
-
-    <!-- ৪. প্রোডাক্ট সেকশন (Product Grid) -->
-    <section class="products-section" id="products">
-        <h2>স্পেশাল প্রোডাক্টস</h2>
-        <div class="product-grid" id="productContainer">
-            
-            <!-- প্রোডাক্ট ১ (ডেমো ডামি ডেটা) -->
-            <div class="product-card">
-                <div class="product-img">
-                    <img src="https://via.placeholder.com/200" alt="Product Image">
-                </div>
-                <div class="product-info">
-                    <span class="category-tag">Fashion</span>
-                    <h3 class="product-title">স্মার্ট ওয়াচ Pro</h3>
-                    <div class="rating">
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-regular fa-star"></i>
-                    </div>
-                    <div class="price-box">
-                        <span class="price">৳ ১,৫০০</span>
-                        <span class="old-price">৳ ২,০০০</span>
-                    </div>
-                    <button class="add-to-cart-btn"><i class="fa-solid fa-cart-plus"></i> কার্টে যোগ করুন</button>
-                </div>
-            </div>
-
-            <!-- প্রোডাক্ট ২ (ডেমো ডামি ডেটা) -->
-            <div class="product-card">
-                <div class="product-img">
-                    <img src="https://via.placeholder.com/200" alt="Product Image">
-                </div>
-                <div class="product-info">
-                    <span class="category-tag">Electronics</span>
-                    <h3 class="product-title">ওয়ারলেস হেডফোন</h3>
-                    <div class="rating">
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                    </div>
-                    <div class="price-box">
-                        <span class="price">৳ ২,২০০</span>
-                        <span class="old-price">৳ ২,৮০০</span>
-                    </div>
-                    <button class="add-to-cart-btn"><i class="fa-solid fa-cart-plus"></i> কার্টে যোগ করুন</button>
-                </div>
-            </div>
-
-        </div>
-    </section>
-
-    <!-- ৫. সার্ভিস/ট্রাস্ট ফিচার সেকশন (Trust<!-- ৮. কন্টাক্ট সেকশন (Contact Section) -->
-<section class="contact-section" id="contact">
-    <div class="contact-container">
-        <div class="contact-info">
-            <h2>আমাদের সাথে যোগাযোগ করুন</h2>
-            <p>আপনার যেকোনো প্রশ্ন, মতামত বা সহায়তার জন্য আমাদের ইমেইল অথবা মেসেজ পাঠান। আমরা দ্রুত উত্তর দেওয়ার চেষ্টা করব।</p>
-            
-            <div class="info-item">
-                <i class="fa-solid fa-location-dot"></i>
-                <div>
-                    <h4>ঠিকানা</h4>
-                    <p>ধানমন্ডি ৩২, ঢাকা-১২০৯, বাংলাদেশ</p>
-                </div>
-            </div>
-            
-            <div class="info-item">
-                <i class="fa-solid fa-envelope"></i>
-                <div>
-                    <h4>ইমেইল</h4>
-                    <p>support@yourbrand.com</p>
-                </div>
-            </div>
-            
-            <div class="info-item">
-                <i class="fa-solid fa-phone"></i>
-                <div>
-                    <h4>ফোন</h4>
-                    <p>+8801843175676</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="contact-form-card">
-            <h3>মেসেজ পাঠান</h3>
-            <form id="contactForm" novalidate>
-                <div class="form-group">
-                    <label for="name">আপনার নাম</label>
-                    <input type="text" id="name" placeholder="আপনার পূর্ণ নাম লিখুন">
-                    <small class="error-message" id="nameError"></small>
-                </div>
-
-                <div class="form-group">
-                    <label for="email">ইমেইল ঠিকানা</label>
-                    <input type="email" id="email" placeholder="example@mail.com">
-                    <small class="error-message" id="emailError"></small>
-                </div>
-
-                <div class="form-group">
-                    <label for="phone">ফোন নম্বর</label>
-                    <input type="tel" id="phone" placeholder="01843175676">
-                    <small class="error-message" id="phoneError"></small>
-                </div>
-
-                <div class="form-group">
-                    <label for="message">মেসেজ</label>
-                    <textarea id="message" rows="4" placeholder="আপনার বার্তাটি এখানে লিখুন..."></textarea>
-                    <small class="error-message" id="messageError"></small>
-                </div>
-
-                <button type="submit" class="submit-btn">মেসেজ পাঠান <i class="fa-solid fa-paper-plane"></i></button>
-                <div class="form-status" id="formStatus"></div>
-            </form>
-        </div>
+<section class="hero-banner">
+    <div class="hero-content">
+        <h1>ধামাকা ঈদ অফার!</h1>
+        <p>সকল ফ্যাশন আইটেমে ৫০% পর্যন্ত ছাড়। সীমিত সময়ের জন্য!</p>
+        <a href="{{ url_for('products') }}" class="btn-primary">
+            এখনই কিনুন
+        </a>
     </div>
 </section>
- Badges) -->
-    <section class="features">
-        <div class="feature-item">
-            <i class="fa-solid fa-truck-fast"></i>
-            <h4>ফ্রি শিপিং</h4>
-            <p>৳ ২০০০+ অর্ডারে</p>
-        </div>
-        <div class="feature-item">
-            <i class="fa-solid fa-arrow-rotate-left"></i>
-            <h4>৭ দিনের রিফান্ড</h4>
-            <p>সহজ রিটার্ন পলিসি</p>
-        </div>
-        <div class="feature-item">
-            <i class="fa-solid fa-shield-halved"></i>
-            <h4>নিরাপদ পেমেন্ট</h4>
-            <p>১০০% সুরক্ষিত লেনদেন</p>
-        </div>
-        <div class="feature-item">
-            <i class="fa-solid fa-headset"></i>
-            <h4>২৪/৭ সাপোর্ট</h4>
-            <p>যেকোনো সহায়তায়</p>
-        </div>
-    </section>
 
-    <!-- ৬. ফুটার (Footer) -->
-    <footer class="footer">
-        <div class="footer-container">
-            <div class="footer-col">
-                <h3>ShopLogo</h3>
-                <p>আপনার পছন্দের সেরা কেনাকাটার বিশ্বস্ত মাধ্যম।</p>
-            </div>
-            <div class="footer-col">
-                <h4>দ্রুত লিংক</h4>
-                <ul>
-                    <li><a href="#">আমাদের সম্পর্কে</a></li>
-                    <li><a href="#">প্রাইভেসি পলিসি</a></li>
-                    <li><a href="#">টার্মস ও কন্ডিশন</a></li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                <h4>যোগাযোগ</h4>
-                <p>ইমেইল: hadielectromart@gmail.com</p>
-                <p>ফোন: +8801843175676</p>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; ২০২৬ ShopLogo. সর্বস্বত্ব সংরক্ষিত।</p>
-        </div>
-    </footer>
+<section class="categories">
+    <h2>পপুলার ক্যাটাগরি</h2>
 
-    <!-- ৭. স্লাইড-আউট কার্ট ড্রয়ার (Cart Drawer Modal) -->
-    <div class="cart-drawer" id="cartDrawer"><!-- ৯. চেকআউট পপ-আপ মডাল (Checkout Modal) -->
-<div class="checkout-modal-overlay" id="checkoutModal">
-    <div class="checkout-modal"><!-- ১০. লগইন পপ-আপ মডাল (Login Modal) -->
-<div class="checkout-modal-overlay" id="loginModal">
-    <div class="checkout-modal">
-        <div class="checkout-header">
-            <h3><i class="fa-solid fa-user-lock"></i> অ্যাকাউন্টে লগইন করুন</h3>
-            <button class="close-modal" id="closeLoginModal">&times;</button>
-        </div>
-        <form id="loginForm" novalidate>
-            <div class="checkout-body">
-                <div class="form-group">
-                    <label for="loginEmail">ইমেইল বা ফোন নম্বর *</label>
-                    <input type="text" id="loginEmail" placeholder="example@mail.com বা 017XXXXXXXX">
-                    <small class="error-message" id="loginEmailError"></small>
-                </div>
-                <div class="form-group">
-                    <label for="loginPassword">পাসওয়ার্ড *</label>
-                    <input type="password" id="loginPassword" placeholder="******">
-                    <small class="error-message" id="loginPasswordError"></small>
-                </div>
-            </div>
-            <div class="checkout-footer">
-                <button type="submit" class="confirm-order-btn">লগইন করুন <i class="fa-solid fa-right-to-bracket"></i></button>
-            </div>
-        </form>
+    <div class="category-grid">
+        <a class="category-card"
+           href="{{ url_for('products', category='Electronics') }}">
+            ইলেকট্রনিক্স
+        </a>
+
+        <a class="category-card"
+           href="{{ url_for('products', category='Accessories') }}">
+            অ্যাক্সেসরিজ
+        </a>
+
+        <a class="category-card"
+           href="{{ url_for('products', category='Bags') }}">
+            ব্যাগ
+        </a>
+
+        <a class="category-card"
+           href="{{ url_for('products') }}">
+            সব পণ্য
+        </a>
     </div>
-</div>
+</section>
 
-        <div class="checkout-header">
-            <h3><i class="fa-solid fa-bag-shopping"></i> অর্ডারের তথ্য ও পেমেন্ট</h3>
-            <button class="close-modal" id="closeCheckoutModal">&times;</button>
-        </div>
-        
-        <form id="checkoutForm" novalidate>
-            <div class="checkout-body">
-                <!-- অর্ডার সামারি -->
-                <div class="order-summary-box">
-                    <span>মোট প্রদেয় টাকা:</span>
-                    <strong id="modalTotalPrice">৳ ০</strong>
-                </div>
+<section class="products-section">
+    <h2>জনপ্রিয় পণ্য</h2>
 
-                <!-- কাস্টমার ডেলিভারি ইনফরমেশন -->
-                <h4>১. ডেলিভারি তথ্য</h4>
-                <div class="form-group">
-                    <label for="custName">আপনার নাম *</label>
-                    <input type="text" id="custName" placeholder="আপনার পূর্ণ নাম">
-                    <small class="error-message" id="custNameError"></small>
-                </div>
-
-                <div class="form-group">
-                    <label for="custPhone">ফোন নম্বর *</label>
-                    <input type="tel" id="custPhone" placeholder="01843175676">
-                    <small class="error-message" id="custPhoneError"></small>
-                </div>
-
-                <div class="form-group">
-                    <label for="custAddress">সম্পূর্ণ ঠিকানা *</label>
-                    <textarea id="custAddress" rows="2" placeholder="বাড়ি/রোড নম্বর, এলাকা, থানা, জেলা"></textarea>
-                    <small class="error-message" id="custAddressError"></small>
-                </div>
-
-                <!-- পেমেন্ট মেথড নির্বাচন -->
-                <h4>২. পেমেন্ট মেথড নির্বাচন করুন</h4>
-                <div class="payment-options">
-                    <label class="payment-option">
-                        <input type="radio" name="paymentMethod" value="bkash" checked>
-                        <span class="option-card bkash-card">
-                            <i class="fa-solid fa-mobile-screen"></i> বিকাশ (bKash)
-                        </span>
-                    </label>
-
-                    <label class="payment-option">
-                        <input type="radio" name="paymentMethod" value="nagad">
-                        <span class="option-card nagad-card">
-                            <i class="fa-solid fa-mobile-screen"></i> নগদ (Nagad)
-                        </span>
-                    </label>
-
-                    <label class="payment-option">
-                        <input type="radio" name="paymentMethod" value="cod">
-                        <span class="option-card cod-card">
-                            <i class="fa-solid fa-hand-holding-dollar"></i> ক্যাশ অন ডেলিভারি
-                        </span>
-                    </label>
-                </div>
-
-                <!-- মোবাইল ব্যাংকিং ইন্সট্রাকশন ও ট্রানজাকশন আইডি (Conditional View) -->
-                <div class="mfs-details" id="mfsDetails">
-                    <p class="mfs-instruction">
-                        আমাদের মার্চেন্ট/ব্যক্তিগত নম্বর: <strong id="mfsNumber">01843175676</strong>-এ টাকা 'Send Money' বা 'Make Payment' করুন।
-                    </p>
-                    <div class="form-group">
-                        <label for="trxId">ট্রানজাকশন আইডি (TrxID) *</label>
-                        <input type="text" id="trxId" placeholder="e.g. 9H7A2X8P">
-                        <small class="error-message" id="trxIdError"></small>
-                    </div>
-                </div>
+    <div class="product-grid">
+        {% for product in products %}
+        <article class="product-card">
+            <div class="product-img">
+                <img src="{{ product.image }}" alt="{{ product.name }}">
             </div>
 
-            <div class="checkout-footer">
-                <button type="submit" class="confirm-order-btn">অর্ডার নিশ্চিত করুন <i class="fa-solid fa-circle-check"></i></button>
-            </div>
-        </form>
-    </div>
-</div>
+            <div class="product-info">
+                <span class="category-tag">
+                    {{ product.category }}
+                </span>
 
-        <div class="cart-header">
-            <h3>আপনার শপিং কার্ট</h3>
-            <button class="close-cart" id="closeCart">&times;</button>
-        </div>
-        <div class="cart-body" id="cartItems">
-            <p>আপনার কার্ট এখন খালি।</p>
-        </div>
-        <div class="cart-footer">
-            <div class="cart-total">
-                <span>মোট:</span>
-                <span id="totalPrice">৳ ০</span>
+                <h3 class="product-title">
+                    {{ product.name }}
+                </h3>
+
+                <div class="price-box">
+                    <span class="price">
+                        ৳ {{ product.price }}
+                    </span>
+                </div>
+
+                <a class="add-to-cart-btn"
+                   href="{{ url_for('product', product_id=product.id) }}">
+                    বিস্তারিত দেখুন
+                </a>
             </div>
-            <button class="checkout-btn">চেকআউট করুন</button>
-        </div>
+        </article>
+        {% else %}
+        <p>কোনো পণ্য পাওয়া যায়নি।</p>
+        {% endfor %}
     </div>
 
-</body>
-</html>
+    <br>
 
-    <!-- Script Link -->
-    <script src="static/script.js"></script>
-</body>
-</html>
+    <a class="btn-primary" href="{{ url_for('products') }}">
+        সব পণ্য দেখুন
+    </a>
+</section>
+
+{% endblock %}
