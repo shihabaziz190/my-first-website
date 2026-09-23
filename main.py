@@ -16,7 +16,15 @@ USERS = {"admin@gmail.com": {"password": "123456", "role": "admin"}}
 def admin_required(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
-        if session.get('user') != 'admin@shop.com':
+        if session.get('user') != 'ADMIN_EMAIL = "admin@gmail.com"
+ADMIN_PASSWORD = "123456"
+
+USERS = {
+    ADMIN_EMAIL: {
+        "password": ADMIN_PASSWORD,
+        "role": "admin"
+    }
+}
             flash("Admin access required.", "danger")
             return redirect(url_for('auth'))
         return f(*args, **kwargs)
