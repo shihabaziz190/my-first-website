@@ -146,3 +146,102 @@ if (closeCart) closeCart.addEventListener('click', closeCartDrawer);
 
 // প্রাথমিক পেজ লোড রেন্ডার
 document.addEventListener('DOMContentLoaded', renderProducts);
+// ==========================================
+// ৭. কন্টাক্ট ফর্ম ক্লায়েন্ট-সাইড ভ্যালিডেশন
+// ==========================================
+const contactForm = document.getElementById('contactForm');
+
+if (contactForm) {
+    const nameInput = document.getElementById('name');
+    const emailInput = document.getElementById('email');
+    const phoneInput = document.getElementById('phone');
+    const messageInput = document.getElementById('message');
+    const formStatus = document.getElementById('formStatus');
+
+    // হেল্পার ফাংশন: এরর মেসেজ দেখানো
+    function showError(input, errorElement, message) {
+        input.classList.add('invalid');
+        errorElement.innerText = message;
+    }
+
+    // হেল্পার ফাংশন: এরর ক্লিয়ার করা
+    function clearError(input, errorElement) {
+        input.classList.remove('invalid');
+        errorElement.innerText = '';
+    }
+
+    // ইমেইল প্যাটার্ন ভ্যালিডেশন
+    function isValidEmail(email) {
+        const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return re.test(email);
+    }
+
+    // মোবাইল নম্বর ভ্যালিডেশন (বাংলাদেশের ১১ ডিজিটের নম্বর)
+    function isValidPhone(phone) {
+        const re = /^01[3-9]\d{8}$/;
+        return re.test(phone.trim());
+    }
+
+    // লাইভ ইনপুট ভ্যালিডেশন (ইউজার টাইপ করার সময় এরর চলে যাবে)
+    nameInput.addEventListener('input', () => clearError(nameInput, document.getElementById('nameError')));
+    emailInput.addEventListener('input', () => clearError(emailInput, document.getElementById('emailError')));
+    phoneInput.addEventListener('input', () => clearError(phoneInput, document.getElementById('phoneError')));
+    messageInput.addEventListener('input', () => clearError(messageInput, document.getElementById('messageError')));
+
+    // ফর্ম সাবমিট হ্যান্ডলার
+    contactForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+        let isValid = true;
+
+        // নাম ভ্যালিডেশন
+        if (nameInput.value.trim() === '') {
+            showError(nameInput, document.getElementById('nameError'), 'অনুগ্রহ করে আপনার নাম লিখুন।');
+            isValid = false;
+        } else if (nameInput.value.trim().length < 3) {
+            showError(nameInput, document.getElementById('nameError'), 'নাম অন্তত ৩ অক্ষরের হতে হবে।');
+            isValid = false;
+        }
+
+        // ইমেইল ভ্যালিডেশন
+        if (emailInput.value.trim() === '') {
+            showError(emailInput, document.getElementById('emailError'), 'অনুগ্রহ করে ইমেইল লিখুন।');
+            isValid = false;
+        } else if (!isValidEmail(emailInput.value.trim())) {
+            showError(emailInput, document.getElementById('emailError'), 'সঠিক ইমেইল ঠিকানা দিন (e.g. example@mail.com)।');
+            isValid = false;
+        }
+
+        // ফোন নম্বর ভ্যালিডেশন
+        if (phoneInput.value.trim() === '') {
+            showError(phoneInput, document.getElementById('phoneError'), 'অনুগ্রহ করে ফোন নম্বর লিখুন।');
+            isValid = false;
+        } else if (!isValidPhone(phoneInput.value)) {
+            showError(phoneInput, document.getElementById('phoneError'), 'সঠিক ১১ ডিজিটের ফোন নম্বর দিন (যেমন: 017XXXXXXXX)।');
+            isValid = false;
+        }
+
+        // মেসেজ ভ্যালিডেশন
+        if (messageInput.value.trim() === '') {
+            showError(messageInput, document.getElementById('messageError'), 'আপনার মেসেজটি লিখুন।');
+            isValid = false;
+        } else if (messageInput.value.trim().length < 10) {
+            showError(messageInput, document.getElementById('messageError'), 'মেসেজ অন্তত ১০ অক্ষরের হতে হবে।');
+            isValid = false;
+        }
+
+        // সব ঠিক থাকলে সাফল্য বার্তা দেখাবে
+        if (isValid) {
+            formStatus.className = 'form-status success';
+            formStatus.innerText = 'ধন্যবাদ! আপনার মেসেজটি সফলভাবে পাঠানো হয়েছে।';
+            contactForm.reset();
+
+            // ৫ সেকেন্ড পর মেসেজ মুছে যাবে
+            setTimeout(() => {
+                formStatus.innerText = '';
+            }, 5000);
+        } else {
+            formStatus.className = 'form-status error';
+            formStatus.innerText = 'অনুগ্রহ করে সঠিক তথ্য দিয়ে ফর্মটি পূরণ করুন।';
+        }
+    });
+}
