@@ -4,19 +4,7 @@ from functools import wraps
 app = Flask(__name__)
 app.secret_key = 'super_secret_key_change_in_production'
 
-# Mock Database
-PRODUCTS = [
-    {"id": 1, "name": "Minimalist Watch", "price": 120.0, "category": "Accessories", "image": "https://via.placeholder.com/300", "description": "Sleek and classic wristwatch."},
-    {"id": 2, "name": "Wireless Headphones", "price": 199.99, "category": "Electronics", "image": "https://via.placeholder.com/300", "description": "High-fidelity sound cancellation."},
-    {"id": 3, "name": "Leather Backpack", "price": 85.0, "category": "Bags", "image": "https://via.placeholder.com/300", "description": "Durable handcrafted genuine leather."},
-]
-
-USERS = {"admin@gmail.com": {"password": "123456", "role": "admin"}}
-
-def admin_required(f):
-    @wraps(f)
-    def decorated_function(*args, **kwargs):
-        if session.get('user') != 'ADMIN_EMAIL = "admin@gmail.com"
+ADMIN_EMAIL = "admin@gmail.com"
 ADMIN_PASSWORD = "123456"
 
 USERS = {
@@ -25,10 +13,24 @@ USERS = {
         "role": "admin"
     }
 }
+
+# Mock Database
+PRODUCTS = [
+    {"id": 1, "name": "Minimalist Watch", "price": 120.0, "category": "Accessories", "image": "https://via.placeholder.com/300", "description": "Sleek and classic wristwatch."},
+    {"id": 2, "name": "Wireless Headphones", "price": 199.99, "category": "Electronics", "image": "https://via.placeholder.com/300", "description": "High-fidelity sound cancellation."},
+    {"id": 3, "name": "Leather Backpack", "price": 85.0, "category": "Bags", "image": "https://via.placeholder.com/300", "description": "Durable handcrafted genuine leather."},
+]
+
+
+def admin_required(f):
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        if session.get('user') != ADMIN_EMAIL:
             flash("Admin access required.", "danger")
             return redirect(url_for('auth'))
         return f(*args, **kwargs)
     return decorated_function
+
 
 @app.context_processor
 def inject_cart_count():
@@ -36,10 +38,12 @@ def inject_cart_count():
     count = sum(cart.values())
     return dict(cart_count=count)
 
+
 @app.route('/')
 def index():
     featured = PRODUCTS[:2]
     return render_template('index.html', products=featured)
+
 
 @app.route('/products')
 def products():
@@ -50,6 +54,7 @@ def products():
         filtered = PRODUCTS
     return render_template('products.html', products=filtered)
 
+
 @app.route('/product/<int:product_id>')
 def product(product_id):
     item = next((p for p in PRODUCTS if p['id'] == product_id), None)
@@ -57,6 +62,7 @@ def product(product_id):
         flash("Product not found", "warning")
         return redirect(url_for('products'))
     return render_template('product.html', product=item)
+
 
 @app.route('/add_to_cart/<int:product_id>', methods=['POST'])
 def add_to_cart(product_id):
@@ -66,6 +72,7 @@ def add_to_cart(product_id):
     session['cart'] = cart
     flash("Item added to cart!", "success")
     return redirect(url_for('cart'))
+
 
 @app.route('/cart')
 def cart():
@@ -79,6 +86,7 @@ def cart():
             total += subtotal
             cart_items.append({'product': item, 'qty': qty, 'subtotal': subtotal})
     return render_template('cart.html', items=cart_items, total=total)
+
 
 @app.route('/update_cart', methods=['POST'])
 def update_cart():
@@ -94,6 +102,7 @@ def update_cart():
     session['cart'] = cart
     return redirect(url_for('cart'))
 
+
 @app.route('/checkout', methods=['GET', 'POST'])
 def checkout():
     if request.method == 'POST':
@@ -103,17 +112,20 @@ def checkout():
     total = sum(next(p['price'] for p in PRODUCTS if p['id'] == int(pid)) * qty for pid, qty in cart.items())
     return render_template('checkout.html', total=total)
 
+
 @app.route('/auth', methods=['GET', 'POST'])
 def auth():
     if request.method == 'POST':
-        email = request.form.get('email')
-        password = request.form.get('password')
-        if email in USERS and USERS[email]['password'] == password:
+        email = request.form.get('email', '').strip().lower()
+        password = request.form.get('password', '')
+        user = USERS.get(email)
+        if user and user['password'] == password:
             session['user'] = email
             flash("Successfully logged in!", "success")
-            return redirect(url_for('admin') if USERS[email]['role'] == 'admin' else url_for('index'))
+            return redirect(url_for('admin') if user['role'] == 'admin' else url_for('index'))
         flash("Invalid credentials.", "danger")
     return render_template('auth.html')
+
 
 @app.route('/logout')
 def logout():
@@ -121,9 +133,11 @@ def logout():
     flash("Logged out successfully.", "info")
     return redirect(url_for('index'))
 
+
 @app.route('/success')
 def success():
     return render_template('success.html')
+
 
 @app.route('/admin', methods=['GET', 'POST'])
 @admin_required
@@ -141,6 +155,7 @@ def admin():
         flash("Product added successfully!", "success")
         return redirect(url_for('admin'))
     return render_template('admin.html', products=PRODUCTS)
+
 
 if __name__ == '__main__':
     app.run(debug=True)
