@@ -3,7 +3,6 @@ ADMIN_EMAIL = os.environ.get("ADMIN_EMAIL", "admin@gmail.com")
 ADMIN_PASSWORD = os.environ.get("ADMIN_PASSWORD", "123456")
 SECRET_KEY = os.environ.get("SECRET_KEY", "temporary-secret-key")
 app.secret_key = SECRET_KEY
-
 from flask import Flask, render_template, request, redirect, url_for, session, flash
 from functools import wraps
 app = Flask(__name__hadi_electro_mart)
