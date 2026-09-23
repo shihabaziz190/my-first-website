@@ -1,155 +1,478 @@
+/* ==========================================
+   ১. বেসিক রিসেট ও ভেরিয়েবল (Global Styles)
+   ========================================== */
 * {
-    box-sizing: border-box;
     margin: 0;
     padding: 0;
-    font-family: Arial, sans-serif;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+:root {
+    --primary-color: #ff4757;
+    --primary-hover: #e84118;
+    --secondary-color: #2f3542;
+    --bg-light: #f1f2f6;
+    --text-color: #333333;
+    --text-muted: #747d8c;
+    --white: #ffffff;
+    --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    --border-radius: 8px;
+    --transition: all 0.3s ease;
 }
 
 body {
-    background-color: #f8f9fa;
-    color: #333;
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
+    background-color: var(--bg-light);
+    color: var(--text-color);
+    line-height: 1.6;
 }
 
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+ul {
+    list-style: none;
+}
+
+/* ==========================================
+   ২. নেভিগেশন বার (Navbar)
+   ========================================== */
 .navbar {
-    background-color: #222;
-    color: white;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem 2rem;
+    background-color: var(--white);
+    padding: 15px 5%;
+    box-shadow: var(--shadow);
+    position: sticky;
+    top: 0;
+    z-index: 100;
 }
 
-.navbar a {
-    color: white;
-    text-decoration: none;
-    margin-left: 1rem;
+.logo a {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--primary-color);
 }
 
-.container {
-    max-width: 1100px;
-    margin: 2rem auto;
-    padding: 0 1rem;
-    flex: 1;
+.search-bar {
+    display: flex;
+    width: 40%;
+    max-width: 500px;
 }
 
-.hero {
-    background-color: #e9ecef;
-    padding: 3rem;
-    border-radius: 8px;
-    margin-bottom: 2rem;
+.search-bar input {
+    width: 100%;
+    padding: 10px 15px;
+    border: 1px solid #ddd;
+    border-radius: var(--border-radius) 0 0 var(--border-radius);
+    outline: none;
+    font-size: 14px;
+}
+
+.search-bar button {
+    padding: 10px 20px;
+    background-color: var(--primary-color);
+    color: var(--white);
+    border: none;
+    border-radius: 0 var(--border-radius) var(--border-radius) 0;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.search-bar button:hover {
+    background-color: var(--primary-hover);
+}
+
+.nav-icons {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.nav-item {
+    font-size: 14px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: var(--transition);
+    position: relative;
+}
+
+.nav-item:hover {
+    color: var(--primary-color);
+}
+
+.cart-count {
+    background-color: var(--primary-color);
+    color: var(--white);
+    font-size: 11px;
+    padding: 2px 6px;
+    border-radius: 50%;
+    font-weight: bold;
+}
+
+/* ==========================================
+   ৩. হিরো সেকশন (Hero Banner)
+   ========================================== */
+.hero-banner {
+    background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://picsum.photos/1200/400') center/cover no-repeat;
+    height: 350px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     text-align: center;
+    color: var(--white);
+    padding: 0 20px;
+}
+
+.hero-content h1 {
+    font-size: 38px;
+    margin-bottom: 10px;
+}
+
+.hero-content p {
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+.btn-primary {
+    display: inline-block;
+    padding: 12px 30px;
+    background-color: var(--primary-color);
+    color: var(--white);
+    border-radius: var(--border-radius);
+    font-weight: 600;
+    transition: var(--transition);
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-hover);
+    transform: translateY(-2px);
+}
+
+/* ==========================================
+   ৪. ক্যাটাগরি সেকশন (Categories)
+   ========================================== */
+.categories {
+    padding: 40px 5%;
+}
+
+.categories h2, .products-section h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: var(--secondary-color);
+    position: relative;
+}
+
+.category-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 20px;
+}
+
+.category-card {
+    background-color: var(--white);
+    padding: 25px;
+    text-align: center;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+    cursor: pointer;
+}
+
+.category-card:hover {
+    transform: translateY(-5px);
+    border-bottom: 3px solid var(--primary-color);
+}
+
+.category-card i {
+    font-size: 32px;
+    color: var(--primary-color);
+    margin-bottom: 10px;
+}
+
+.category-card h3 {
+    font-size: 16px;
+}
+
+/* ==========================================
+   ৫. প্রোডাক্ট সেকশন (Product Grid)
+   ========================================== */
+.products-section {
+    padding: 20px 5% 40px;
 }
 
 .product-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 1.5rem;
-    margin-top: 1.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 25px;
 }
 
 .product-card {
-    background: white;
-    border: 1px solid #ddd;
-    border-radius: 6px;
-    padding: 1rem;
-    text-align: center;
-}
-
-.product-card img, .product-detail img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 4px;
-}
-
-.product-detail {
+    background-color: var(--white);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
     display: flex;
-    gap: 2rem;
-    background: white;
-    padding: 2rem;
-    border-radius: 8px;
+    flex-direction: column;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+}
+
+.product-img {
+    width: 100%;
+    height: 200px;
+    background-color: #fafafa;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.product-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: var(--transition);
+}
+
+.product-card:hover .product-img img {
+    transform: scale(1.05);
+}
+
+.product-info {
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.category-tag {
+    font-size: 12px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+}
+
+.product-title {
+    font-size: 16px;
+    margin: 5px 0;
+    color: var(--secondary-color);
+}
+
+.rating {
+    color: #f1c40f;
+    font-size: 12px;
+    margin-bottom: 8px;
+}
+
+.price-box {
+    margin-bottom: 15px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
 }
 
 .price {
-    font-size: 1.25rem;
-    color: #27ae60;
-    font-weight: bold;
-    margin: 0.5rem 0;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--primary-color);
 }
 
-.btn, .btn-secondary {
-    display: inline-block;
-    padding: 0.5rem 1rem;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    text-decoration: none;
-    margin-top: 0.5rem;
+.old-price {
+    font-size: 14px;
+    color: var(--text-muted);
+    text-decoration: line-through;
 }
 
-.btn {
-    background-color: #007bff;
-    color: white;
-}
-
-.btn-secondary {
-    background-color: #6c757d;
-    color: white;
-}
-
-.cart-table {
+.add-to-cart-btn {
+    margin-top: auto;
     width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 1.5rem;
-    background: white;
+    padding: 10px;
+    background-color: var(--secondary-color);
+    color: var(--white);
+    border: none;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    font-weight: 600;
+    transition: var(--transition);
 }
 
-.cart-table th, .cart-table td {
-    border: 1px solid #ddd;
-    padding: 0.75rem;
-    text-align: left;
+.add-to-cart-btn:hover {
+    background-color: var(--primary-color);
 }
 
-.form-container {
-    max-width: 500px;
-    margin: 0 auto;
-    background: white;
-    padding: 2rem;
-    border-radius: 8px;
+/* ==========================================
+   ৬. ট্রাস্ট ফিচার সেকশন (Trust Badges)
+   ========================================== */
+.features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    padding: 40px 5%;
+    background-color: var(--white);
+    margin-top: 20px;
+}
+
+.feature-item {
+    text-align: center;
+    padding: 15px;
+}
+
+.feature-item i {
+    font-size: 28px;
+    color: var(--primary-color);
+    margin-bottom: 10px;
+}
+
+.feature-item h4 {
+    font-size: 16px;
+    color: var(--secondary-color);
+}
+
+.feature-item p {
+    font-size: 13px;
+    color: var(--text-muted);
+}
+
+/* ==========================================
+   ৭. ফুটার (Footer)
+   ========================================== */
+.footer {
+    background-color: var(--secondary-color);
+    color: #dcdde1;
+    padding-top: 40px;
+}
+
+.footer-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 30px;
+    padding: 0 5% 30px;
+}
+
+.footer-col h3, .footer-col h4 {
+    color: var(--white);
+    margin-bottom: 15px;
+}
+
+.footer-col ul li {
+    margin-bottom: 8px;
+}
+
+.footer-col ul li a:hover {
+    color: var(--primary-color);
+}
+
+.footer-bottom {
+    text-align: center;
+    padding: 15px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: 13px;
+}
+
+/* ==========================================
+   ৮. কার্ট ড্রয়ার / পপআপ (Cart Drawer)
+   ========================================== */
+.cart-drawer {
+    position: fixed;
+    top: 0;
+    right: -350px; /* হিডেন রাখার জন্য */
+    width: 320px;
+    height: 100vh;
+    background-color: var(--white);
+    box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    transition: var(--transition);
 }
 
-.form-container input, .form-container textarea {
-    width: 100%;
-    padding: 0.5rem;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+.cart-drawer.active {
+    right: 0; /* স্ক্রিনে প্রদর্শন করার জন্য */
 }
 
-.form-row {
+.cart-header {
+    padding: 20px;
+    background-color: var(--secondary-color);
+    color: var(--white);
     display: flex;
-    gap: 1rem;
+    justify-content: space-between;
+    align-items: center;
 }
 
-.alert {
-    padding: 0.75rem 1.25rem;
-    margin-bottom: 1rem;
-    border-radius: 4px;
+.close-cart {
+    background: none;
+    border: none;
+    color: var(--white);
+    font-size: 24px;
+    cursor: pointer;
 }
 
-.alert-success { background-color: #d4edda; color: #155724; }
-.alert-danger { background-color: #f8d7da; color: #721c24; }
-.alert-warning { background-color: #fff3cd; color: #856404; }
-.alert-info { background-color: #d1ecf1; color: #0c5460; }
+.cart-body {
+    padding: 20px;
+    flex-grow: 1;
+    overflow-y: auto;
+}
 
-footer {
-    background-color: #222;
-    color: white;
-    text-align: center;
-    padding: 1rem;
-    margin-top: auto;
+.cart-footer {
+    padding: 20px;
+    border-top: 1px solid #ddd;
+}
+
+.cart-total {
+    display: flex;
+    justify-content: space-between;
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+.checkout-btn {
+    width: 100%;
+    padding: 12px;
+    background-color: var(--primary-color);
+    color: var(--white);
+    border: none;
+    border-radius: var(--border-radius);
+    font-weight: 700;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.checkout-btn:hover {
+    background-color: var(--primary-hover);
+}
+
+/* ==========================================
+   ৯. রেসপন্সিভ ডিজাইন (Responsive Queries)
+   ========================================== */
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .search-bar {
+        width: 100%;
+    }
+
+    .hero-content h1 {
+        font-size: 26px;
+    }
+
+    .hero-content p {
+        font-size: 14px;
+    }
+
+    .cart-drawer {
+        width: 100%;
+        right: -100%;
+    }
 }
