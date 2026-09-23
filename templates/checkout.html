@@ -1,23 +1,32 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>Checkout</h1>
-<p>Total Amount Due: <strong>${{ "%.2f"|format(total) }}</strong></p>
+<div class="form-container">
+    <h1>Checkout</h1>
+    <p>Total Amount Due: <strong>৳ {{ total }}</strong></p>
 
-<form action="{{ url_for('checkout') }}" method="POST" class="form-container">
-    <h2>Shipping Details</h2>
-    <input type="text" placeholder="Full Name" required>
-    <input type="email" placeholder="Email Address" required>
-    <input type="text" placeholder="Address" required>
-    <input type="text" placeholder="City" required>
-    
-    <h2>Payment Information</h2>
-    <input type="text" placeholder="Card Number" required>
-    <div class="form-row">
-        <input type="text" placeholder="MM/YY" required>
-        <input type="text" placeholder="CVC" required>
-    </div>
-    
-    <button type="submit" class="btn">Place Order</button>
-</form>
+    <form action="{{ url_for('checkout') }}" method="POST">
+        <h2>Shipping Details</h2>
+        <input type="text" name="full_name" placeholder="Full Name" required>
+        <input type="tel" name="phone" placeholder="Phone Number" required>
+        <textarea name="address" placeholder="Address" required></textarea>
+
+        <h2>Payment Method</h2>
+        <label>
+            <input type="radio" name="payment_method" value="bkash" checked>
+            bKash
+        </label><br>
+        <label>
+            <input type="radio" name="payment_method" value="nagad">
+            Nagad
+        </label><br>
+        <label>
+            <input type="radio" name="payment_method" value="cod">
+            Cash on Delivery
+        </label><br><br>
+
+        <input type="text" name="trxid" placeholder="Transaction ID (if applicable)">
+        <button type="submit" class="btn">Place Order</button>
+    </form>
+</div>
 {% endblock %}
