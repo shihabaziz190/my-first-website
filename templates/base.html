@@ -1,43 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Storefront</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-</head>
-<body>
-    <header class="navbar">
-        <div class="logo"><a href="{{ url_for('index') }}">StoreFront</a></div>
-        <nav>
-            <a href="{{ url_for('index') }}">Home</a>
-            <a href="{{ url_for('products') }}">Products</a>
-            <a href="{{ url_for('cart') }}">Cart ({{ cart_count }})</a>
-            {% if session.get('user') %}
-                {% if session.get('user') == 'admin@shop.com' %}
-                    <a href="{{ url_for('admin') }}">Admin</a>
-                {% endif %}
-                <a href="{{ url_for('logout') }}">Logout</a>
-            {% else %}
-                <a href="{{ url_for('auth') }}">Login</a>
-            {% endif %}
-        </nav>
-    </header>
+{% extends 'base.html' %}
 
-    <div class="container">
-        {% with messages = get_flashed_messages(with_categories=true) %}
-            {% if messages %}
-                {% for category, message in messages %}
-                    <div class="alert alert-{{ category }}">{{ message }}</div>
-                {% endfor %}
-            {% endif %}
-        {% endwith %}
-
-        {% block content %}{% endblock %}
-    </div>
-
-    <footer>
-        <p>&copy; 2026 StoreFront E-Commerce. All rights reserved.</p>
-    </footer>
-</body>
-</html>
+{% block content %}
+<div class="form-container">
+    <h1>Account Login</h1>
+    <form action="{{ url_for('auth') }}" method="POST">
+        <label for="email">Email</label>
+        <input type="email" name="email" id="email" required>
+        
+        <label for="password">Password</label>
+        <input type="password" name="password" id="password" required>
+        
+        <button type="submit" class="btn">Login</button>
+    </form>
+    <p>Admin credentials: <code>admin@gmail.com</code> / <code>123456</code></p>
+</div>
+{% endblock %}
