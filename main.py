@@ -118,7 +118,17 @@ def checkout():
     total = sum(next(p['price'] for p in PRODUCTS if p['id'] == int(pid)) * qty for pid, qty in cart.items())
     return render_template('checkout.html', total=total)
 
-
+@app.route('/checkout', methods=['GET', 'POST'])
+def checkout():
+    if request.method == 'POST':
+        payment_method = request.form.get('payment_method')
+        trxid = request.form.get('trxid')
+        session['cart'] = {}
+        flash(f"Order placed successfully via {payment_method}", "success")
+        return redirect(url_for('success'))
+    cart = session.get('cart', {})
+    total = sum(next(p['price'] for p in PRODUCTS if p['id'] == int(pid)) * qty for pid, qty in cart.items())
+    return render_template('checkout.html', total=total)
 @app.route('/auth', methods=['GET', 'POST'])
 def auth():
     if request.method == 'POST':
