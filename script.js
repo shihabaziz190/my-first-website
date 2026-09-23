@@ -257,7 +257,3 @@ if (loginForm) {
         if (!email || !password) {
             e.preventDefault();
             alert('ইমেইল এবং পাসওয়ার্ড দিন।');
-        }
-        // তথ্য ঠিক থাকলে form স্বাভাবিকভাবে /auth-এ submit হবে
-    });
-}
