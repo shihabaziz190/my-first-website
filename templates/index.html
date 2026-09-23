@@ -231,7 +231,87 @@
     </footer>
 
     <!-- ৭. স্লাইড-আউট কার্ট ড্রয়ার (Cart Drawer Modal) -->
-    <div class="cart-drawer" id="cartDrawer">
+    <div class="cart-drawer" id="cartDrawer"><!-- ৯. চেকআউট পপ-আপ মডাল (Checkout Modal) -->
+<div class="checkout-modal-overlay" id="checkoutModal">
+    <div class="checkout-modal">
+        <div class="checkout-header">
+            <h3><i class="fa-solid fa-bag-shopping"></i> অর্ডারের তথ্য ও পেমেন্ট</h3>
+            <button class="close-modal" id="closeCheckoutModal">&times;</button>
+        </div>
+        
+        <form id="checkoutForm" novalidate>
+            <div class="checkout-body">
+                <!-- অর্ডার সামারি -->
+                <div class="order-summary-box">
+                    <span>মোট প্রদেয় টাকা:</span>
+                    <strong id="modalTotalPrice">৳ ০</strong>
+                </div>
+
+                <!-- কাস্টমার ডেলিভারি ইনফরমেশন -->
+                <h4>১. ডেলিভারি তথ্য</h4>
+                <div class="form-group">
+                    <label for="custName">আপনার নাম *</label>
+                    <input type="text" id="custName" placeholder="আপনার পূর্ণ নাম">
+                    <small class="error-message" id="custNameError"></small>
+                </div>
+
+                <div class="form-group">
+                    <label for="custPhone">ফোন নম্বর *</label>
+                    <input type="tel" id="custPhone" placeholder="017XXXXXXXX">
+                    <small class="error-message" id="custPhoneError"></small>
+                </div>
+
+                <div class="form-group">
+                    <label for="custAddress">সম্পূর্ণ ঠিকানা *</label>
+                    <textarea id="custAddress" rows="2" placeholder="বাড়ি/রোড নম্বর, এলাকা, থানা, জেলা"></textarea>
+                    <small class="error-message" id="custAddressError"></small>
+                </div>
+
+                <!-- পেমেন্ট মেথড নির্বাচন -->
+                <h4>২. পেমেন্ট মেথড নির্বাচন করুন</h4>
+                <div class="payment-options">
+                    <label class="payment-option">
+                        <input type="radio" name="paymentMethod" value="bkash" checked>
+                        <span class="option-card bkash-card">
+                            <i class="fa-solid fa-mobile-screen"></i> বিকাশ (bKash)
+                        </span>
+                    </label>
+
+                    <label class="payment-option">
+                        <input type="radio" name="paymentMethod" value="nagad">
+                        <span class="option-card nagad-card">
+                            <i class="fa-solid fa-mobile-screen"></i> নগদ (Nagad)
+                        </span>
+                    </label>
+
+                    <label class="payment-option">
+                        <input type="radio" name="paymentMethod" value="cod">
+                        <span class="option-card cod-card">
+                            <i class="fa-solid fa-hand-holding-dollar"></i> ক্যাশ অন ডেলিভারি
+                        </span>
+                    </label>
+                </div>
+
+                <!-- মোবাইল ব্যাংকিং ইন্সট্রাকশন ও ট্রানজাকশন আইডি (Conditional View) -->
+                <div class="mfs-details" id="mfsDetails">
+                    <p class="mfs-instruction">
+                        আমাদের মার্চেন্ট/ব্যক্তিগত নম্বর: <strong id="mfsNumber">01700000000</strong>-এ টাকা 'Send Money' বা 'Make Payment' করুন।
+                    </p>
+                    <div class="form-group">
+                        <label for="trxId">ট্রানজাকশন আইডি (TrxID) *</label>
+                        <input type="text" id="trxId" placeholder="e.g. 9H7A2X8P">
+                        <small class="error-message" id="trxIdError"></small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="checkout-footer">
+                <button type="submit" class="confirm-order-btn">অর্ডার নিশ্চিত করুন <i class="fa-solid fa-circle-check"></i></button>
+            </div>
+        </form>
+    </div>
+</div>
+
         <div class="cart-header">
             <h3>আপনার শপিং কার্ট</h3>
             <button class="close-cart" id="closeCart">&times;</button>
